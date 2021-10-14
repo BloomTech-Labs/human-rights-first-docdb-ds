@@ -9,7 +9,7 @@ import uvicorn
 
 API = FastAPI(
     title='Lambda School Labs Data Science API',
-    version="0.0.2",
+    version="0.0.3",
     docs_url='/',
 )
 API.add_middleware(

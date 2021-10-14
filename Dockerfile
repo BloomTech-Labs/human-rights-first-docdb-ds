@@ -1,5 +1,4 @@
 FROM ubuntu
-# includes Python 3.8.5
 
 # Linux Updates
 ARG DEBIAN_FRONTEND=noninteractive
