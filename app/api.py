@@ -2,8 +2,6 @@
 Labs DS Machine Learning Operations Role
 - Application Programming Interface
 """
-import json
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
