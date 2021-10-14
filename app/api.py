@@ -1,3 +1,9 @@
+"""
+Labs DS Machine Learning Operations Role
+- Application Programming Interface
+"""
+import json
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
@@ -5,7 +11,7 @@ import uvicorn
 
 API = FastAPI(
     title='Lambda School Labs Data Science API',
-    version="0.39.1",
+    version="0.0.2",
     docs_url='/',
 )
 API.add_middleware(
@@ -15,15 +21,6 @@ API.add_middleware(
     allow_methods=['*'],
     allow_headers=['*'],
 )
-
-
-@API.get("/home/")
-async def home():
-    return {
-        "status": 200,
-        "message": "Hello, world!"
-    }
-
 
 if __name__ == '__main__':
     uvicorn.run(API)

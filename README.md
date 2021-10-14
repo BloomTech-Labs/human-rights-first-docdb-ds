@@ -7,6 +7,17 @@
 - ML Model: Tesseract
 - Visualizations: Plotly
 
+## DS Architecture
+- Read Data
+ - PFC Box Docs
+- Process Data
+  - Tesseract OCR (requires Docker)
+  - Tagging
+- Store Data
+  - Search Tags: List
+  - Target Path: String
+  - Source URL: String
+
 ## Reference Fields
 - Names
 - Locations
