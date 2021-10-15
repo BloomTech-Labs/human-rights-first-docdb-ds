@@ -9,8 +9,6 @@ from pdf2image import convert_from_bytes
 
 load_dotenv()
 
-uuid = "007a58f2-894d-424f-824a-2b281ea5b00f"
-
 s3 = Session(
     aws_access_key_id=os.getenv("ACCESS_KEY"),
     aws_secret_access_key=os.getenv("SECRET_KEY"),
