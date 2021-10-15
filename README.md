@@ -1,10 +1,12 @@
 # Labs Data Science API Template
+
 ## Tech Stack
 - Logic: Python
 - API Framework: FastAPI
-- Database: MongoDB?
+- Database: MongoDB
 - ML Model: Tesseract
 - Visualizations: Plotly
+
 ## DS Architecture
 - Read Data
  - PFC Box Docs
@@ -16,3 +18,14 @@
   - Target Path: String
   - Source URL: String
 
+## Reference Fields
+- Names
+- Locations
+- Organizations
+- Serial Number
+- Other Tags
+
+## Users
+- Admin
+- Researcher
+- Public (eventually)
