@@ -12,7 +12,7 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 
 
-|[Alex Lucchesi](https://github.com/lucchesia7)   
+[Alex Lucchesi](https://github.com/lucchesia7)   
 
 [Alyssa Murray](https://github.com/dagtag)    
 
