@@ -61,8 +61,19 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
   - FastAPI
   - MongoDB
   - Tesseract
-    - Docker
-  - plotly
+  - plotly  
+
+
+## Docker
+### Build Docker
+```
+docker build . -t docdb
+```
+
+### Run Docker
+```
+docker run -it -p 3000:3000 docdb uvicorn app.api:API --host=0.0.0.0 --port=3000
+```
 
 
 # Contributing
