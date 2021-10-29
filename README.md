@@ -12,20 +12,25 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 
 
-|[Alex Lucchesi](https://github.com/lucchesia7) 
-[Alyssa Murray](https://github.com/dagtag)  
-[Greg Engelmann](https://github.com/engegreg) 
-[Hunter Jordan](https://github.com/Hunter-Jordan)
-[Peter Rockwood](https://github.com/prockwood)
-[Joshua Aurajo](https://github.com/joshua-aurajo)
+|[Alex Lucchesi](https://github.com/lucchesia7)   
+
+[Alyssa Murray](https://github.com/dagtag)    
+
+[Greg Engelmann](https://github.com/engegreg)   
+
+[Hunter Jordan](https://github.com/Hunter-Jordan)  
+
+[Peter Rockwood](https://github.com/prockwood)  
+
+[Joshua Aurajo](https://github.com/joshua-aurajo)  
 
 
 <br>
 <br>
 
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
-![Python](https://docs.python.org/3/)
-![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
+![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)  
+
+![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)  
 
 
 - Fork and clone the repo to install it as your own remote.
@@ -57,7 +62,7 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
   - MongoDB
   - Tesseract
     - Docker
-  - Plotly-dash
+  - plotly
 
 
 # Contributing
