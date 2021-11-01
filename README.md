@@ -21,6 +21,7 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 [Youssef Al-Yakoob](https://github.com/yalyakoob)
 [Mark Porath](https://github.com/m-rath)
 [Guy Altman](https://github.com/galtman5)
+[Jake Harris](https://github.com/theawesomejaik)
 
 <br>
 <br>
