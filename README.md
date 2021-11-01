@@ -9,9 +9,6 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 ## Contributors
 
-
-
-
 |[Alex Lucchesi](https://github.com/lucchesia7) 
 [Alyssa Murray](https://github.com/dagtag)  
 [Greg Engelmann](https://github.com/engegreg) 
@@ -26,11 +23,14 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 <br>
 <br>
 
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
-![Python](https://img.shields.io/badge/python-v3.9-blue)
-![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
+![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)  
+
+![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square) 
+
+![Python](https://docs.python.org/3/)
 
 
+### Getting Started
 - Fork and clone the repo to install it as your own remote.
   - **note** please [be sure to set your remote](https://help.github.jp/enterprise/2.11/user/articles/changing-a-remote-s-url/) for this repo to point to your Labs Team Front End Repository.
 - run: `pip install` to download all dependencies.
@@ -59,8 +59,19 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
   - FastAPI
   - MongoDB
   - Tesseract
-    - Docker
-  - Plotly-dash
+  - plotly  
+
+
+## Docker
+### Build Docker
+```
+docker build . -t docdb
+```
+
+### Run Docker
+```
+docker run -it -p 3000:3000 docdb uvicorn app.api:API --host=0.0.0.0 --port=3000
+```
 
 
 # Contributing
