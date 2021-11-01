@@ -5,19 +5,26 @@ For steps on how to work with this repository [please see documentation here](ht
 
 # Human Rights First Directory
 
-You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](https://a.humanrightsfirstdocdb.dev/).
+You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](https://a.humanrightsfirstdocdb.dev/). <br><br>
+
+## Research
+
+Automated document summaries come in many forms.
+- For a broad overview, see these [lecture slides](http://web.stanford.edu/class/cs276b/handouts/lecture14.pdf).
+- Abstractive summaries are feasible with Google's [PEGASUS](https://arxiv.org/pdf/1912.08777.pdf), available in the [repo](https://github.com/google-research/pegasus) and described on [Google's AI blog](https://ai.googleblog.com/2020/06/pegasus-state-of-art-model-for.html). <br><br>
 
 ## Contributors
 
 
 
 
-|[Alex Lucchesi](https://github.com/lucchesia7) 
+[Alex Lucchesi](https://github.com/lucchesia7) 
 [Alyssa Murray](https://github.com/dagtag)  
 [Greg Engelmann](https://github.com/engegreg) 
 [Hunter Jordan](https://github.com/Hunter-Jordan)
 [Peter Rockwood](https://github.com/prockwood)
 [Joshua Aurajo](https://github.com/joshua-aurajo)
+[Mark Porath](https://github.com/m-rath)
 
 
 <br>
