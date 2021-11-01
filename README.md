@@ -20,24 +20,38 @@ SpaCy offers pretrained models for Named Entity Recognition. But the key terms m
 ## Contributors
 
 
+[Alex Lucchesi](https://github.com/lucchesia7) 
 
-
-|[Alex Lucchesi](https://github.com/lucchesia7) 
 [Alyssa Murray](https://github.com/dagtag)  
+
 [Greg Engelmann](https://github.com/engegreg) 
+
 [Hunter Jordan](https://github.com/Hunter-Jordan)
+
 [Peter Rockwood](https://github.com/prockwood)
+
 [Joshua Aurajo](https://github.com/joshua-aurajo)
 
+[Mark Porath](https://github.com/m-rath)
+
+[Youssef Al-Yakoob](https://github.com/yalyakoob)
+
+[Guy Altman](https://github.com/galtman5)
+
+[Jake Harris](https://github.com/theawesomejaik)
+
 
 <br>
 <br>
 
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
+![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)  
+
+![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square) 
+
 ![Python](https://docs.python.org/3/)
-![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
 
 
+### Getting Started
 - Fork and clone the repo to install it as your own remote.
   - **note** please [be sure to set your remote](https://help.github.jp/enterprise/2.11/user/articles/changing-a-remote-s-url/) for this repo to point to your Labs Team Front End Repository.
 - run: `pip install` to download all dependencies.
@@ -66,8 +80,19 @@ SpaCy offers pretrained models for Named Entity Recognition. But the key terms m
   - FastAPI
   - MongoDB
   - Tesseract
-    - Docker
-  - Plotly-dash
+  - plotly  
+
+
+## Docker
+### Build Docker
+```
+docker build . -t docdb
+```
+
+### Run Docker
+```
+docker run -it -p 3000:3000 docdb uvicorn app.api:API --host=0.0.0.0 --port=3000
+```
 
 
 # Contributing
