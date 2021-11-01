@@ -40,9 +40,11 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)  
 
+![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square) 
+
 ![Python](https://docs.python.org/3/)
 
-![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)  
+ 
 
 
 - Fork and clone the repo to install it as your own remote.
