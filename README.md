@@ -24,11 +24,23 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 [Joshua Aurajo](https://github.com/joshua-aurajo)  
 
+[Youssef Al-Yakoob](https://github.com/yalyakoob)  
+
+[Guy Altman](https://github.com/galtman5)  
+
+[Jake Harris](https://github.com/theawesomejaik)  
+
+[Mark Porath](https://github.com/m-rath)
+
+
+
 
 <br>
 <br>
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)  
+
+![Python](https://docs.python.org/3/)
 
 ![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)  
 
