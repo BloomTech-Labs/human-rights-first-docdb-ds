@@ -9,31 +9,16 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 ## Contributors
 
-
-
-
-[Alex Lucchesi](https://github.com/lucchesia7)   
-
-[Alyssa Murray](https://github.com/dagtag)    
-
-[Greg Engelmann](https://github.com/engegreg)   
-
-[Hunter Jordan](https://github.com/Hunter-Jordan)  
-
-[Peter Rockwood](https://github.com/prockwood)  
-
-[Joshua Aurajo](https://github.com/joshua-aurajo)  
-
-[Youssef Al-Yakoob](https://github.com/yalyakoob)  
-
-[Guy Altman](https://github.com/galtman5)  
-
-[Jake Harris](https://github.com/theawesomejaik)  
-
+|[Alex Lucchesi](https://github.com/lucchesia7) 
+[Alyssa Murray](https://github.com/dagtag)  
+[Greg Engelmann](https://github.com/engegreg) 
+[Hunter Jordan](https://github.com/Hunter-Jordan)
+[Peter Rockwood](https://github.com/prockwood)
+[Joshua Aurajo](https://github.com/joshua-aurajo)
+[Youssef Al-Yakoob](https://github.com/yalyakoob)
 [Mark Porath](https://github.com/m-rath)
-
-
-
+[Guy Altman](https://github.com/galtman5)
+[Jake Harris](https://github.com/theawesomejaik)
 
 <br>
 <br>
@@ -44,9 +29,8 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 ![Python](https://docs.python.org/3/)
 
- 
 
-
+### Getting Started
 - Fork and clone the repo to install it as your own remote.
   - **note** please [be sure to set your remote](https://help.github.jp/enterprise/2.11/user/articles/changing-a-remote-s-url/) for this repo to point to your Labs Team Front End Repository.
 - run: `pip install` to download all dependencies.
