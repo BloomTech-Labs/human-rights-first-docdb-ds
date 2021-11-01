@@ -40,18 +40,7 @@ if __name__ == '__main__':
     box = BoxWrapper()
     items_in_fold = list(box.items_in_folder())
     fold = items_in_fold[0]
-    # print(fold.name)
     items_in_fold = list(box.items_in_folder(fold.id))
-    # print(type(items_in_fold[0]))
-    # print(items_in_fold[0])
     file_path, bts = box.download_file(items_in_fold[0].id)
     print(file_path)
     print(len(bts))
-    # info = box.get_file_info(items_in_fold[0].id)
-    # pth = "/".join(s.name for s in info.path_collection['entries']) + f"/{info.name}"
-    # print(type(info.path_collection['entries']))
-    # for item in info.path_collection['entries']:
-    #     print(type(item))
-    #     pth += item.name + "/"
-    # pth += "/" + info.name
-    # print(pth)
