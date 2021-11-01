@@ -33,6 +33,11 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 - run: `pip install` to download all dependencies.
 
 
+### Research
+- Tags:
+  Extracting tags could be achieved by vectorization (TFIDF, CountVectorizer or SpaCy) of documents.
+
+
 ### Key Features
 
 - computer vision based document searching  
