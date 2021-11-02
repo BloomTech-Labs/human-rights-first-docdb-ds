@@ -57,6 +57,11 @@ SpaCy offers pretrained models for Named Entity Recognition. But the key terms m
 - run: `pip install` to download all dependencies.
 
 
+### Research
+- Tags:
+  Extracting tags could be achieved by vectorization (TFIDF, CountVectorizer or SpaCy) of documents.
+
+
 ### Key Features
 
 - computer vision based document searching  
