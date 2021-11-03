@@ -77,7 +77,7 @@ def tess_and_filter(bts, conf_threshold=50, return_conf_mean=False):
 
     Returns:
         A tuple of a tessearact produced string and word_confidence mean
-            value, when return_conf_mean=True
+        value, when return_conf_mean=True
     """
     word_string = filter_by_confidence(tesseractor(bts), conf_threshold, return_conf_mean)
     return (word_string)
