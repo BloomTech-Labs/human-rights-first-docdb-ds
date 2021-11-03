@@ -54,8 +54,9 @@ class DocProcessor:
             data_df = pd.DataFrame([x.split('\t') for x in str_list])
             # set first line as column names
             data_df.columns = data_df.iloc[0]
-            # drop first row: names, drop last row: all none
+            # drop first row: names,
             data_df = data_df.iloc[1:]
+            data_df = data_df[['text', 'conf']]
             # convert confidence values to int for mean(), filtering
             data_df['conf'] = data_df['conf'].astype('int')
 
@@ -70,25 +71,8 @@ class DocProcessor:
             else:
                 return out_str, conf_mean
 
-        def tess_and_filter(bts, conf_threshold, return_conf_mean):
-            """
-            tesseractor() then filter_by_confidence.
+        return filter_by_confidence(tesseractor(bts), conf_threshold, return_conf_mean)
 
-            Arguments:
-                1) A byte_string from box_wrapper.download_file()
-                2) (kwarg) An integer [0-100], representing a percent
-                    word-confidence-threshold, below which words are dropped
-                3) (kwarg) if True: returns the mean of word-confidence values of
-                    tesseract converted document as a second value.
-
-            Returns:
-                A tuple of a tessearact produced string and word_confidence mean
-                value, when return_conf_mean=True
-            """
-            word_string = filter_by_confidence(tesseractor(bts), conf_threshold, return_conf_mean)
-            return (word_string)
-
-        return tess_and_filter(bts, conf_threshold, return_conf_mean)
 
 if __name__ == '__main__':
     from .box_wrapper import BoxWrapper
@@ -101,7 +85,7 @@ if __name__ == '__main__':
     info['text'] = doc_processor.get_text_conf_filter(box.download_file(file_id),
                                                                         200,
                                                                         conf_threshold=60,
-                                                                        return_conf_mean=True)
+                                                                        return_conf_mean=False)
     for key, val in info.items():
         if key == "text":
             print(f"{key} : {val[:200]}")
