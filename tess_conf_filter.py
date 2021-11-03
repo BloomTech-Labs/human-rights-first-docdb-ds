@@ -31,9 +31,6 @@ def tesseractor(byte_string):
             # drop column names on subsequent pages
             str_list = str_list + page_data.split('\n')[1:-1]
 
-#         #timer for testing
-#         end_time=time.time()-start_time
-#         print('execution time: ', end_time, 'seconds')
     return str_list
 
 
@@ -68,6 +65,19 @@ def filter_by_confidence(str_list, conf_threshold, return_conf_mean=False):
 
 
 def tess_and_filter(bts, conf_threshold=50, return_conf_mean=False):
-    """Compose above two functions."""
+    """
+    Run tessaract and exlude words below a specified threshold.
+
+    Arguments:
+        1) A byte_string from box_wrapper.download_file()
+        2) (kwarg) An integer [0-100], representing a percent
+            word-confidence-threshold, below which words are dropped
+        3) (kwarg) if True: returns the mean of word-confidence values of
+            tesseract converted document as a second value.
+
+    Returns:
+        A tuple of a tessearact produced string and word_confidence mean
+            value, when return_conf_mean=True
+    """
     word_string = filter_by_confidence(tesseractor(bts), conf_threshold, return_conf_mean)
-    return word_string
+    return (word_string)
