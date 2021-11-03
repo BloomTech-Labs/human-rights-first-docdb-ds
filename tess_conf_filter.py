@@ -66,7 +66,7 @@ def filter_by_confidence(str_list, conf_threshold, return_conf_mean=False):
 
 def tess_and_filter(bts, conf_threshold=50, return_conf_mean=False):
     """
-    Run tessaract and exlude words below a specified threshold.
+    tesseractor() then filter_by_confidence.
 
     Arguments:
         1) A byte_string from box_wrapper.download_file()
