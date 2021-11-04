@@ -5,32 +5,61 @@ For steps on how to work with this repository [please see documentation here](ht
 
 # Human Rights First Directory
 
-You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](https://a.humanrightsfirstdocdb.dev/).
+You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](https://a.humanrightsfirstdocdb.dev/). <br><br>
+
+## Research
+
+Automated document summaries come in many forms.
+- For a broad overview, see these [lecture slides](http://web.stanford.edu/class/cs276b/handouts/lecture14.pdf).
+- Abstractive summaries are feasible with Google's [PEGASUS](https://arxiv.org/pdf/1912.08777.pdf), available in the [repo](https://github.com/google-research/pegasus) and described on [Google's AI blog](https://ai.googleblog.com/2020/06/pegasus-state-of-art-model-for.html). <br><br>
+
+SpaCy offers pretrained models for Named Entity Recognition. But the key terms most pertinent to our stakeholder are not necessarily recognized by generic models.
+- [Prodigy](https://prodi.gy/) is a tool for building custom NER datasets.
+- Annotation is always labor-intensive, but prodigy could work well for us, or for the researchers themselves, if our app somehow exposes this functionality to the end user. See [this video for a walkthrough](https://www.youtube.com/watch?v=59BKHO_xBPA). <br><br>
 
 ## Contributors
 
 
+[Alex Lucchesi](https://github.com/lucchesia7) 
 
-
-|[Alex Lucchesi](https://github.com/lucchesia7) 
 [Alyssa Murray](https://github.com/dagtag)  
+
 [Greg Engelmann](https://github.com/engegreg) 
+
 [Hunter Jordan](https://github.com/Hunter-Jordan)
+
 [Peter Rockwood](https://github.com/prockwood)
+
 [Joshua Aurajo](https://github.com/joshua-aurajo)
 
+[Mark Porath](https://github.com/m-rath)
+
+[Youssef Al-Yakoob](https://github.com/yalyakoob)
+
+[Guy Altman](https://github.com/galtman5)
+
+[Jake Harris](https://github.com/theawesomejaik)
+
 
 <br>
 <br>
 
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
+![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)  
+
+![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square) 
+
 ![Python](https://docs.python.org/3/)
-![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
 
 
+### Getting Started
 - Fork and clone the repo to install it as your own remote.
   - **note** please [be sure to set your remote](https://help.github.jp/enterprise/2.11/user/articles/changing-a-remote-s-url/) for this repo to point to your Labs Team Front End Repository.
 - run: `pip install` to download all dependencies.
+
+
+### Research
+- Tags:
+  Extracting tags could be achieved by vectorization (TFIDF, CountVectorizer or SpaCy) of documents.
 
 
 ### Key Features
@@ -56,8 +85,19 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
   - FastAPI
   - MongoDB
   - Tesseract
-    - Docker
-  - Plotly-dash
+  - plotly  
+
+
+## Docker
+### Build Docker
+```
+docker build . -t docdb
+```
+
+### Run Docker
+```
+docker run -it -p 3000:3000 docdb uvicorn app.api:API --host=0.0.0.0 --port=3000
+```
 
 
 # Contributing
