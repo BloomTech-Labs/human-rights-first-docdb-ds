@@ -84,9 +84,10 @@ if __name__ == '__main__':
     inf = box.get_file_info("23470520869")
     for key, val in inf.items():
         if isinstance(val, dict):
-            print(key + "{")
+            print(key + ": {")
             for k, v in val.items():
-                print(f"{k} : {v}")
+                print(f"    {k} : {v}")
+            print("}")
         else:
             print(f"{key} : {val}")
     print()

@@ -23,4 +23,10 @@ if __name__ == '__main__':
         if key == "text":
             print(f"{key} : {val[:200]}")
         else:
-            print(f"{key} : {val}")
+            if isinstance(val, dict):
+                print(key + ": {")
+                for k, v in val.items():
+                    print(f"    {k} : {v}")
+                print("}")
+            else:
+                print(f"{key} : {val}")
