@@ -4,7 +4,8 @@ from pdf2image import convert_from_bytes
 
 
 class DocProcessor:
-    def get_text(self, bts: bytes, dpi=90):
+    @staticmethod
+    def get_text(bts: bytes, dpi=90) -> str:
         pages = convert_from_bytes(bts, dpi=dpi)
         text = " ".join(map(pytesseract.image_to_string, pages))
         clean_text = re.sub(r"\s+", " ", text)
@@ -17,8 +18,7 @@ if __name__ == '__main__':
     box = BoxWrapper()
     file_id = "23470520869"
     info = box.get_file_info(file_id)
-    doc_processor = DocProcessor()
-    info['text'] = doc_processor.get_text(box.download_file(file_id), 200)
+    info['text'] = DocProcessor.get_text(box.download_file(file_id), 200)
     for key, val in info.items():
         if key == "text":
             print(f"{key} : {val[:200]}")

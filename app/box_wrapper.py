@@ -62,16 +62,36 @@ class BoxWrapper:
 
 if __name__ == '__main__':
     box = BoxWrapper()
-    inf = box.get_file_info("873662819506")
+    "Folder with only files in it:"
+    files1, folds1 = box.items_in_folder("2757280923")
+    for item in files1:
+        for key, val in item.items():
+            print(f"{key} : {val}")
+    print("For reference, here's the list of folders in the folder")
+    print(folds1)
+    print()
+
+    print("Folder with only folders in it:")
+    files2, folds2 = box.items_in_folder("129133191949")
+    for item in folds2:
+        for key, val in item.items():
+            print(f"{key} : {val}")
+    print("For reference, here's the list of files in the folder")
+    print(files2)
+    print()
+
+    print("File Info:")
+    inf = box.get_file_info("23470520869")
     for key, val in inf.items():
-        print(f"{key} : {val}")
-    # items_fold = box.items_in_folder("129133191949")
-    # print(items_fold)
-    # for item in items_fold:
-    #     print(f"ID: {item.id}, name: {item.name}, type: {item.type}")
-    # items_in_fold = list(box.items_in_folder())
-    # fold = items_in_fold[0]
-    # items_in_fold = list(box.items_in_folder(fold.id))
-    # file_path, bts = box.download_file(23470514533)
-    # print(file_path)
-    # print(len(bts))
+        if isinstance(val, dict):
+            print(key + "{")
+            for k, v in val.items():
+                print(f"{k} : {v}")
+        else:
+            print(f"{key} : {val}")
+    print()
+
+    print("Download file:")
+    bts = box.download_file("23470520869")
+    print(f"Length: {len(bts)}")
+    print(f"Type: {type(bts)}")
