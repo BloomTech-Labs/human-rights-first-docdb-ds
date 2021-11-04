@@ -79,6 +79,10 @@ SpaCy offers pretrained models for Named Entity Recognition. But the key terms m
 - ML Model: Tesseract
 - Visualizations: Plotly
 
+## Architecture
+
+![image info](./assets/DS_structural_diagram_v2.png)
+
 # Installation Instructions
 
 - pip install 
