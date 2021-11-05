@@ -7,22 +7,15 @@ For steps on how to work with this repository [please see documentation here](ht
 
 You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](https://a.humanrightsfirstdocdb.dev/). <br><br>
 
-## Research
-
-Automated document summaries come in many forms.
-- For a broad overview, see these [lecture slides](http://web.stanford.edu/class/cs276b/handouts/lecture14.pdf).
-- Abstractive summaries are feasible with Google's [PEGASUS](https://arxiv.org/pdf/1912.08777.pdf), available in the [repo](https://github.com/google-research/pegasus) and described on [Google's AI blog](https://ai.googleblog.com/2020/06/pegasus-state-of-art-model-for.html). <br><br>
-
-SpaCy offers pretrained models for Named Entity Recognition. But the key terms most pertinent to our stakeholder are not necessarily recognized by generic models.
-- [Prodigy](https://prodi.gy/) is a tool for building custom NER datasets.
-- Annotation is always labor-intensive, but prodigy could work well for us, or for the researchers themselves, if our app somehow exposes this functionality to the end user. See [this video for a walkthrough](https://www.youtube.com/watch?v=59BKHO_xBPA). <br><br>
 
 ## Contributors
 
-
+### LABS FT 40
 [Alex Lucchesi](https://github.com/lucchesia7) 
 
 [Alyssa Murray](https://github.com/dagtag)  
+
+[Ben Clowe](https://github.com/benclowe29)
 
 [Greg Engelmann](https://github.com/engegreg) 
 
@@ -40,6 +33,22 @@ SpaCy offers pretrained models for Named Entity Recognition. But the key terms m
 
 [Jake Harris](https://github.com/theawesomejaik)
 
+[Jeremy Hebert](https://github.com/jhebert1994)
+
+[Daniel Ferber](https://github.com/Daos21912)
+
+[Jackson Reber](https://github.com/JacksonReber)
+
+[Madina Izimbetova](https://github.com/madina-iz)
+
+[Amadou N'Gom](https://github.com/Amadou23)
+
+[Jacob Smith](https://github.com/fleekz)
+
+[Mayra Artis](https://github.com/martis407)
+
+[Samuel Egbert](https://github.com/Samuel-Egbert31415)
+
 
 <br>
 <br>
@@ -48,7 +57,7 @@ SpaCy offers pretrained models for Named Entity Recognition. But the key terms m
 
 ![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square) 
 
-![Python](https://docs.python.org/3/)
+![Python](https://img.shields.io/pypi/pyversions/VS)
 
 
 ### Getting Started
@@ -57,9 +66,7 @@ SpaCy offers pretrained models for Named Entity Recognition. But the key terms m
 - run: `pip install` to download all dependencies.
 
 
-### Research
-- Tags:
-  Extracting tags could be achieved by vectorization (TFIDF, CountVectorizer or SpaCy) of documents.
+
 
 
 ### Key Features
@@ -68,6 +75,11 @@ SpaCy offers pretrained models for Named Entity Recognition. But the key terms m
 - fast and reliable storage for crucial documents 
 - accurate and reliable artifact removal
 - built in search algorithms for pulling in necessary information
+
+
+
+## Research
+Our research into this project streches far and wide, covering over a multitude of libraries. To better consolidate space, you can find our research [here](./assets/research.md)
 
 
 
@@ -82,6 +94,7 @@ SpaCy offers pretrained models for Named Entity Recognition. But the key terms m
 ## Architecture
 
 ![image info](./assets/DS_structural_diagram_v2.png)
+![user_flow_model](./assets/user_flow_diagram.png)
 
 # Installation Instructions
 
@@ -89,7 +102,7 @@ SpaCy offers pretrained models for Named Entity Recognition. But the key terms m
   - FastAPI
   - MongoDB
   - Tesseract
-  - plotly  
+  - Plotly  
 
 
 ## Docker
