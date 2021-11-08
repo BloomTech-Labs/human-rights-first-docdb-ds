@@ -6,12 +6,14 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
+from app.data import Data
 
 API = FastAPI(
     title='Lambda School Labs Data Science API',
-    version="0.0.3",
+    version="0.0.4",
     docs_url='/',
 )
+API.db = Data()
 API.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -19,6 +21,11 @@ API.add_middleware(
     allow_methods=['*'],
     allow_headers=['*'],
 )
+
+
+@API.post("/search/{query}")
+async def search(query: str):
+    return {"Result": list(API.db.search(query))}
 
 if __name__ == '__main__':
     uvicorn.run(API)
