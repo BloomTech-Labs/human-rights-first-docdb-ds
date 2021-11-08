@@ -29,10 +29,20 @@ For this project, we are using [PyTesseract](https://pypi.org/project/pytesserac
 
 
 
-## Pegasus
+## Generating document summaries and previews
 Automated document summaries come in many forms.
-- For a broad overview, see these [lecture slides](http://web.stanford.edu/class/cs276b/handouts/lecture14.pdf).
-- Abstractive summaries are feasible with Google's [PEGASUS](https://arxiv.org/pdf/1912.08777.pdf), available in the [repo](https://github.com/google-research/pegasus) and described on [Google's AI blog](https://ai.googleblog.com/2020/06/pegasus-state-of-art-model-for.html).
+- For background, check out [these Stanford lecture slides](http://web.stanford.edu/class/cs276b/handouts/lecture14.pdf).
+- *Abstractive summaries* capture the gist of a document in a sentence or two.
+  - Automatic summaries of this type are tough to generate; until ~2017, training a neural network for this task required *labeled examples* from real people reading articles and writing summaries.
+  - In 2020, researchers at Google Brain and Imperial College London adapted SpanBERT's *unsupervised training* to whole sentences, then optimized all they could: [Pre-training with Extracted Gap-sentences for Abstractive Summarization](https://arxiv.org/pdf/1912.08777.pdf); [Google's AI blog](https://ai.googleblog.com/2020/06/pegasus-state-of-art-model-for.html).
+    - **Model checkpoints and instructions are in [this repo](https://github.com/google-research/pegasus).**
+    - Fine-tune on 1,000 documents to generate state-of-the-art summaries on 100,000 documents.
+    - Insert summaries to the DB offline, then serve up relevant documents' links along with brief summaries.
+- *Query-specific summaries* are less like summaries and more like previews.
+  - Documents deemed relevant to a query presumably contain words identical or nearly identical to the user's search terms; a query-specific summary is an excerpt that contains those relevant terms in their surrounding context.
+  - By definition, these excerpts are undefined until the Front End calls the DS API with search terms.
+  - **[Mongo's built-in function](https://docs.atlas.mongodb.com/reference/atlas-search/highlighting/#std-label-highlight-ref) is probably our best bet**, but we will need custom code for this, too.
+  - If targeted excerpts are too difficult, we could pinpoint any Named Entities or Tags that jibe with search terms.
 
 ## Future Research
 - Tags:

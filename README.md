@@ -45,8 +45,6 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 [Jacob Smith](https://github.com/fleekz)
 
-[Mayra Artis](https://github.com/martis407)
-
 [Samuel Egbert](https://github.com/Samuel-Egbert31415)
 
 
@@ -62,7 +60,7 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 ### Getting Started
 - Fork and clone the repo to install it as your own remote.
-  - **note** please [be sure to set your remote](https://help.github.jp/enterprise/2.11/user/articles/changing-a-remote-s-url/) for this repo to point to your Labs Team Front End Repository.
+  - **note** please [be sure to set your remote](https://help.github.jp/enterprise/2.11/user/articles/changing-a-remote-s-url/) for this repo to point to your Labs Team Repository.
 - run: `pip install` to download all dependencies.
 
 
@@ -79,7 +77,7 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 
 ## Research
-Our research into this project streches far and wide, covering over a multitude of libraries. To better consolidate space, you can find our research [here](./assets/research.md)
+Our research into this project stretches far and wide, covering a multitude of libraries. To better consolidate space, you can find our research [here](./assets/research.md)
 
 
 
@@ -93,7 +91,7 @@ Our research into this project streches far and wide, covering over a multitude 
 
 ## Architecture
 
-![image info](./assets/DS_structural_diagram_v2.png)
+![image info](./assets/DS_structural_diagram_v3.png)
 ![user_flow_model](./assets/user_flow_diagram.png)
 
 # Installation Instructions
