@@ -1,27 +1,32 @@
-import os
 import re
-
 import pytesseract
-from boto3 import Session
-from dotenv import load_dotenv
 from pdf2image import convert_from_bytes
 
 
-load_dotenv()
+class DocProcessor:
+    @staticmethod
+    def get_text(bts: bytes, dpi=90) -> str:
+        pages = convert_from_bytes(bts, dpi=dpi)
+        text = " ".join(map(pytesseract.image_to_string, pages))
+        clean_text = re.sub(r"\s+", " ", text)
+        return clean_text
 
-uuid = "007a58f2-894d-424f-824a-2b281ea5b00f"
 
-s3 = Session(
-    aws_access_key_id=os.getenv("ACCESS_KEY"),
-    aws_secret_access_key=os.getenv("SECRET_KEY"),
-).client("s3")
-response = s3.get_object(
-    Bucket=os.getenv("BUCKET_NAME"),
-    Key=f"{uuid}.pdf",
-)
+if __name__ == '__main__':
+    from .box_wrapper import BoxWrapper
 
-pages = convert_from_bytes(response["Body"].read(), dpi=90)
-text = " ".join(map(pytesseract.image_to_string, pages))
-clean_text = re.sub(r"\s+", " ", text)
-
-print(clean_text[:1000])
+    box = BoxWrapper()
+    file_id = "23470520869"
+    info = box.get_file_info(file_id)
+    info['text'] = DocProcessor.get_text(box.download_file(file_id), 200)
+    for key, val in info.items():
+        if key == "text":
+            print(f"{key} : {val[:200]}")
+        else:
+            if isinstance(val, dict):
+                print(key + ": {")
+                for k, v in val.items():
+                    print(f"    {k} : {v}")
+                print("}")
+            else:
+                print(f"{key} : {val}")
