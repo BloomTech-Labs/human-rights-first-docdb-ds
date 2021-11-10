@@ -1,8 +1,10 @@
 import spacy
-
 import re
+import pytextrank
 
 nlp = spacy.load("en_core_web_sm")
+nlp.add_pipe("positionrank")
+
 
 def get_entities(text):
     """Get tags from text using SpaCy NER"""
@@ -10,6 +12,22 @@ def get_entities(text):
     text = re.sub('  +', ' ', text)
     doc = nlp(text)
     return [e.text for e in doc.ents]
+
+
+def keyword_extraction(text):
+    doc = nlp(text)
+    token_list = []
+    d = {}
+    for token in doc:
+        if token.is_stop == False:
+            token_list.append(token.text)
+    cleaned_tokens = " ".join(token_list)
+    for phrase in doc._.phrases:
+        if phrase.text not in cleaned_tokens:
+            continue
+        else:
+            d[phrase.text] = phrase.rank
+    return list(d.items())[:5]
 
 
 if __name__ == '__main__':

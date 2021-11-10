@@ -3,25 +3,24 @@ import pytesseract
 from pdf2image import convert_from_bytes
 
 
-class DocProcessor:
-    @staticmethod
-    def get_text(bts: bytes, dpi=90) -> str:
-        pages = convert_from_bytes(bts, dpi=dpi)
-        text = " ".join(map(pytesseract.image_to_string, pages))
-        clean_text = re.sub(r"\s+", " ", text)
-        return clean_text
+def ocr(bts: bytes, dpi=90) -> str:
+    pages = convert_from_bytes(bts, dpi=dpi)
+    text = " ".join(map(pytesseract.image_to_string, pages))
+    clean_text = re.sub(r"\s+", " ", text)
+    return clean_text
 
 
 if __name__ == '__main__':
-    from .box_wrapper import BoxWrapper
-
+    from app.box_wrapper import BoxWrapper
+    from nlp import keyword_extraction
     box = BoxWrapper()
     file_id = "23470520869"
     info = box.get_file_info(file_id)
-    info['text'] = DocProcessor.get_text(box.download_file(file_id), 200)
+    info['text'] = ocr(box.download_file(file_id), 200)
     for key, val in info.items():
         if key == "text":
-            print(f"{key} : {val[:200]}")
+            print(f"{key} : {val[:]}")
+            print(f"Keywords: {keyword_extraction(info['text'])}")
         else:
             if isinstance(val, dict):
                 print(key + ": {")
