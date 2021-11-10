@@ -1,6 +1,6 @@
 from app.nlp import get_entities
 from app.box_wrapper import BoxWrapper
-from app.ocr import DocProcessor
+from app.ocr import ocr
 from app.data import Data
 
 box = BoxWrapper()
@@ -64,7 +64,7 @@ def insert_record(file_id, finished):
         'name': info['name'],
         'path': info['path'],
         'url': info['url'],
-        'raw_text': DocProcessor().get_text(box.download_file(file_id), dpi=150)
+        'raw_text': ocr(box.download_file(file_id), dpi=150)
     }
 
     record['tags'] = get_entities(record['raw_text'])
