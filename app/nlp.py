@@ -4,12 +4,12 @@ import re
 
 nlp = spacy.load("en_core_web_sm")
 
+
 def get_entities(text):
     """Get tags from text using SpaCy NER"""
-    text = re.sub('[^ A-Za-z0-9]', ' ', text)
-    text = re.sub('  +', ' ', text)
+    text = re.sub(r'\s+', ' ', text)
     doc = nlp(text)
-    return [e.text for e in doc.ents]
+    return doc.ents
 
 
 if __name__ == '__main__':
