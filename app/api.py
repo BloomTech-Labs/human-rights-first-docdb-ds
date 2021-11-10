@@ -27,5 +27,10 @@ API.add_middleware(
 async def search(query: str):
     return {"Result": list(API.db.search(query))}
 
+
+@API.post("/docview/{file_id}")
+async def docview(file_id: str):
+    return API.db.find({"id": file_id}, {"_id": False})[0]
+
 if __name__ == '__main__':
     uvicorn.run(API)

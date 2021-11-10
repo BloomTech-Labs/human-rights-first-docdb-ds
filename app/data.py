@@ -40,7 +40,12 @@ class Data:
         return self.connect().count_documents(query)
 
     def search(self, search):
-        return self.find({"$text": {"$search": search}}, {"_id": False})
+        return self.find({"$text": {"$search": search}}, {"id": 1,
+                                                          "name": 1,
+                                                          "path": 1,
+                                                          "url": 1,
+                                                          "tags": 1,
+                                                          "_id": False})
 
     def __str__(self):
         return f"{self.df()}"
@@ -63,7 +68,11 @@ if __name__ == '__main__':
     #     {"FilePath": "Box::Documents/PDFs/Test03.pdf", "Content": "This is a text document"},
     #     {"FilePath": "Box::Documents/PDFs/Test04.pdf", "Content": "This is a text document"},
     # ])
-
-    result = db.search("Box")
+    # query = {
+    #     'id' = ['76743684225'']
+    # }
+    file_id = '23511711927'
+    result = db.find({"id": file_id}, {"_id": False})
+    print(type(result[0]))
     for item in result:
         print(item)
