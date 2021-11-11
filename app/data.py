@@ -4,7 +4,7 @@ Labs DS Data Engineer Role
 - Visualization Interface
 """
 from os import getenv
-from typing import Iterator, Dict, Iterable
+from typing import Iterator, Dict, Iterable, Optional
 
 from pymongo import MongoClient
 import pandas as pd
@@ -24,6 +24,9 @@ class Data:
     def find(self, query: Dict, projection: Dict = None) -> Iterator[Dict]:
         return self.connect().find(query, projection)
 
+    def find_one(self, query: Dict, projection: dict = None) -> Optional[Dict]:
+        return self.connect().find_one(query, projection or {"_id": False})
+
     def insert(self, data: Iterable[Dict]):
         self.connect().insert_many(data)
 
@@ -39,13 +42,8 @@ class Data:
     def count(self, query: Dict) -> int:
         return self.connect().count_documents(query)
 
-    def search(self, search):
-        return self.find({"$text": {"$search": search}}, {"id": 1,
-                                                          "name": 1,
-                                                          "path": 1,
-                                                          "url": 1,
-                                                          "tags": 1,
-                                                          "_id": False})
+    def search(self, search: str, projection: dict = None):
+        return self.find({"$text": {"$search": search}}, projection or {"_id": False})
 
     def __str__(self):
         return f"{self.df()}"

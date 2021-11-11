@@ -51,7 +51,7 @@ class BoxWrapper:
         return dtc
 
     def get_thumbnail(self, file_id):
-        return self.client.file(file_id).get_thumbnail_representation('92x92', extension='jpg')
+        return self.client.file(file_id).get_thumbnail_representation('94x94', extension='jpg')
 
     def download_file(self, file_id: str) -> [bytes, None]:
         info = self.get_file_info(file_id)
