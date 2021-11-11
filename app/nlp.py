@@ -5,10 +5,10 @@ nlp = spacy.load("en_core_web_sm")
 
 def get_entities_and_years(text):
     """Get (1) named entities and (2) years from text using SpaCy NER"""
-    text = re.sub('[^ A-Za-z0-9]', ' ', text)
-    text = re.sub('  +', ' ', text)
+    text = re.sub('[§@]', '', text)
+    text = re.sub(r'\s+', ' ', text)
     doc = nlp(text)
-    entities = [e.text for e in doc.ents] # We might want to exclude date labels from entities, since we are getting years separately
+    entities = doc.ents # We might want to exclude date labels from entities, since we are getting years separately
     years = [re.search("\d{4}", e.text).group(0) for e in doc.ents if e.label_ == 'DATE' and re.search("\d{4}", e.text)]
     return entities, years
 
