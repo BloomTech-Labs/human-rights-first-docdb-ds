@@ -1,4 +1,5 @@
 import spacy
+
 import re
 
 nlp = spacy.load("en_core_web_sm")
@@ -11,7 +12,6 @@ def get_entities_and_years(text):
     entities = doc.ents # We might want to exclude date labels from entities, since we are getting years separately
     years = [re.search("\d{4}", e.text).group(0) for e in doc.ents if e.label_ == 'DATE' and re.search("\d{4}", e.text)]
     return entities, years
-
 
 if __name__ == '__main__':
     some_text = """me (@ CONFIDENTIAL LONDON COPIES BY MUFAX ce PS/Secretar, of § és PUS. ¥ of, 

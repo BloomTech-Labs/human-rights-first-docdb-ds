@@ -5,37 +5,66 @@ For steps on how to work with this repository [please see documentation here](ht
 
 # Human Rights First Directory
 
-You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](https://a.humanrightsfirstdocdb.dev/).
+You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](https://a.humanrightsfirstdocdb.dev/). <br><br>
+
 
 ## Contributors
 
+### LABS FT 40
+[Alex Lucchesi](https://github.com/lucchesia7) 
 
-
-
-|[Alex Lucchesi](https://github.com/lucchesia7) 
 [Alyssa Murray](https://github.com/dagtag)  
+
+[Ben Clowe](https://github.com/benclowe29)
+
 [Greg Engelmann](https://github.com/engegreg) 
+
 [Hunter Jordan](https://github.com/Hunter-Jordan)
+
 [Peter Rockwood](https://github.com/prockwood)
+
 [Joshua Aurajo](https://github.com/joshua-aurajo)
 
+[Mark Porath](https://github.com/m-rath)
+
+[Youssef Al-Yakoob](https://github.com/yalyakoob)
+
+[Guy Altman](https://github.com/galtman5)
+
+[Jake Harris](https://github.com/theawesomejaik)
+
+[Jeremy Hebert](https://github.com/jhebert1994)
+
+[Daniel Ferber](https://github.com/Daos21912)
+
+[Jackson Reber](https://github.com/JacksonReber)
+
+[Madina Izimbetova](https://github.com/madina-iz)
+
+[Amadou N'Gom](https://github.com/Amadou23)
+
+[Jacob Smith](https://github.com/fleekz)
+
+[Samuel Egbert](https://github.com/Samuel-Egbert31415)
+
 
 <br>
 <br>
 
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
-![Python](https://docs.python.org/3/)
-![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
+![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)  
+
+![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square) 
+
+![Python](https://img.shields.io/pypi/pyversions/VS)
 
 
+### Getting Started
 - Fork and clone the repo to install it as your own remote.
-  - **note** please [be sure to set your remote](https://help.github.jp/enterprise/2.11/user/articles/changing-a-remote-s-url/) for this repo to point to your Labs Team Front End Repository.
+  - **note** please [be sure to set your remote](https://help.github.jp/enterprise/2.11/user/articles/changing-a-remote-s-url/) for this repo to point to your Labs Team Repository.
 - run: `pip install` to download all dependencies.
 
 
-### Research
-- Tags:
-  Extracting tags could be achieved by vectorization (TFIDF, CountVectorizer or SpaCy) of documents.
+
 
 
 ### Key Features
@@ -47,6 +76,11 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 
 
+## Research
+Our research into this project stretches far and wide, covering a multitude of libraries. To better consolidate space, you can find our research [here](./assets/research.md)
+
+
+
 # Tech Stack
 
 - Logic: Python
@@ -55,14 +89,30 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 - ML Model: Tesseract
 - Visualizations: Plotly
 
+## Architecture
+
+![image info](./assets/DS_structural_diagram_v3.png)
+![user_flow_model](./assets/user_flow_diagram.png)
+
 # Installation Instructions
 
 - pip install 
   - FastAPI
   - MongoDB
   - Tesseract
-    - Docker
-  - Plotly-dash
+  - Plotly  
+
+
+## Docker
+### Build Docker
+```
+docker build . -t docdb
+```
+
+### Run Docker
+```
+docker run -it -p 3000:3000 docdb uvicorn app.api:API --host=0.0.0.0 --port=3000
+```
 
 
 # Contributing
