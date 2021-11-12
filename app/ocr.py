@@ -15,4 +15,4 @@ if __name__ == '__main__':
 
     box = BoxWrapper()
     file_id = "23470520869"
-    print(ocr(box.download_file(file_id), 200))
+    print(ocr(box.download_file(file_id), 300))

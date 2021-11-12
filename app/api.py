@@ -1,9 +1,6 @@
-"""
-Labs DS Machine Learning Operations Role
-- Application Programming Interface
-"""
+from boxsdk import BoxAPIException
 from fastapi import FastAPI
-from fastapi.responses import Response
+from fastapi.responses import Response, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
@@ -11,8 +8,8 @@ from app.box_wrapper import BoxWrapper
 from app.data import Data
 
 API = FastAPI(
-    title='Lambda School Labs Data Science API',
-    version="0.40.5",
+    title='DocDB Data Science API',
+    version="0.40.6",
     docs_url='/',
 )
 API.db = Data()
@@ -38,7 +35,10 @@ async def lookup(file_id: str):
 
 @API.get("/thumbnail/{file_id}")
 async def thumbnail(file_id: str):
-    return Response(API.box.get_thumbnail(file_id), media_type="image/jpg")
+    try:
+        return Response(API.box.get_thumbnail(file_id), media_type="image/jpg")
+    except BoxAPIException:
+        return FileResponse("app/images/not-found-icon.jpg", media_type="image/jpg")
 
 
 if __name__ == '__main__':

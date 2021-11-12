@@ -1,5 +1,3 @@
-from typing import Union, Tuple
-
 from dotenv import load_dotenv
 from os import getenv
 from boxsdk import OAuth2, Client
@@ -7,19 +5,16 @@ from boxsdk import OAuth2, Client
 
 class BoxWrapper:
     load_dotenv()
-    token = getenv("DEVELOPER_TOKEN", default="0")
-    id = getenv("CLIENT_ID", default="0")
-    secret = getenv("CLIENT_SECRET", default="0")
-    base_folder_id = getenv("BASE_FOLDER_ID", default="0")
     auth = OAuth2(
-        client_id=id,
-        client_secret=secret,
-        access_token=token,
+        client_id=getenv("CLIENT_ID"),
+        client_secret=getenv("CLIENT_SECRET"),
+        access_token=getenv("DEVELOPER_TOKEN"),
     )
     client = Client(auth)
+    base_folder_id = getenv("BASE_FOLDER_ID", default="855631806")
 
-    def items_in_folder(self, folder_id=base_folder_id):
-        items = self.client.folder(folder_id=folder_id).get_items()
+    def items_in_folder(self, folder_id: str = base_folder_id):
+        items = self.client.folder(folder_id).get_items()
         files = []
         folders = []
         for item in items:
@@ -34,18 +29,13 @@ class BoxWrapper:
                 folders.append(dtc)
         return files, folders
 
-    def get_file_info(self, file_id):
+    def get_file_info(self, file_id: str):
         file_info = self.client.file(file_id).get()
         dtc = {
             "id": file_id,
             "name": file_info.name,
-            "ext": file_info.name[-3:],
+            "ext": file_info.name.split(".")[-1],
             "path": "/".join(s.name for s in file_info.path_collection['entries']) + f"/{file_info.name}",
-            "parent_folder": {
-                "id": file_info.path_collection['entries'][-1].id,
-                "name": file_info.path_collection['entries'][-1].name,
-                "url": "https://app.box.com/folder/" + file_info.path_collection['entries'][-1].id,
-            },
             "url": "https://app.box.com/file/" + file_id
         }
         return dtc
