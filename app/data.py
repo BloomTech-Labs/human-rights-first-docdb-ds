@@ -45,6 +45,9 @@ class Data:
     def search(self, search: str, projection: dict = None):
         return self.find({"$text": {"$search": search}}, projection or {"_id": False})
 
+    def add_tag(self, file_id: str, new_tag: str):
+        self.connect().update({'id': file_id}, {'$push': {'tags': new_tag}})
+
     def __str__(self):
         return f"{self.df()}"
 
@@ -69,8 +72,8 @@ if __name__ == '__main__':
     # query = {
     #     'id' = ['76743684225'']
     # }
-    file_id = '23511711927'
-    result = db.find({"id": file_id}, {"_id": False})
-    print(type(result[0]))
-    for item in result:
-        print(item)
+    # file_id = '23511711927'
+    # result = db.find({"id": file_id}, {"_id": False})
+    # print(type(result[0]))
+    # for item in result:
+    #     print(item)

@@ -26,21 +26,18 @@ API.add_middleware(
 
 @API.post("/search/{query}")
 async def search(query: str, projection: dict = None):
-    if 'thumbnail' in projection.keys():
-        thumbnail = projection.pop('thumbnail')
-    else:
-        thumbnail = False
-    results = list(API.db.search(query, projection))
-    if thumbnail:
-        box = BoxWrapper()
-        for result in results:
-            result['thumbnail'] = str(box.get_thumbnail(result['id']))
-    return {"Result": results}
+    return {"Result": list(API.db.search(query, projection))}
 
 
 @API.post("/docview/{file_id}")
 async def docview(file_id: str, projection: dict = None):
     return API.db.find_one({"id": file_id}, projection)
+
+
+@API.put("/add_tag/{file_id}{new_tag}")
+async def add_tag(file_id: str, new_tag: str):
+    API.db.add_tag(file_id, new_tag)
+    return {'Result': 'Success'}
 
 if __name__ == '__main__':
     uvicorn.run(API)
