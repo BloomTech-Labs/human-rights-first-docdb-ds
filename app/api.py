@@ -3,6 +3,7 @@ Labs DS Machine Learning Operations Role
 - Application Programming Interface
 """
 from fastapi import FastAPI
+from fastapi.responses import Response
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
@@ -11,10 +12,11 @@ from app.data import Data
 
 API = FastAPI(
     title='Lambda School Labs Data Science API',
-    version="0.0.4",
+    version="0.40.5",
     docs_url='/',
 )
 API.db = Data()
+API.box = BoxWrapper()
 API.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -24,23 +26,20 @@ API.add_middleware(
 )
 
 
-@API.post("/search/{query}")
-async def search(query: str, projection: dict = None):
-    if 'thumbnail' in projection.keys():
-        thumbnail = projection.pop('thumbnail')
-    else:
-        thumbnail = False
-    results = list(API.db.search(query, projection))
-    if thumbnail:
-        box = BoxWrapper()
-        for result in results:
-            result['thumbnail'] = str(box.get_thumbnail(result['id']))
-    return {"Result": results}
+@API.get("/search/{query}")
+async def search(query: str):
+    return {"Response": list(API.db.search(query))}
 
 
-@API.post("/docview/{file_id}")
-async def docview(file_id: str, projection: dict = None):
-    return API.db.find_one({"id": file_id}, projection)
+@API.get("/lookup/{file_id}")
+async def lookup(file_id: str):
+    return {"Response": API.db.find_one({"box_id": file_id})}
+
+
+@API.get("/thumbnail/{file_id}")
+async def thumbnail(file_id: str):
+    return Response(API.box.get_thumbnail(file_id), media_type="image/jpg")
+
 
 if __name__ == '__main__':
     uvicorn.run(API)

@@ -22,13 +22,16 @@ class Data:
         return MongoClient(self.db_url)[self.db_name][self.db_table]
 
     def find(self, query: Dict, projection: Dict = None) -> Iterator[Dict]:
-        return self.connect().find(query, projection)
+        return self.connect().find(query, projection or {"_id": False})
 
     def find_one(self, query: Dict, projection: dict = None) -> Optional[Dict]:
         return self.connect().find_one(query, projection or {"_id": False})
 
-    def insert(self, data: Iterable[Dict]):
+    def insert_many(self, data: Iterable[Dict]):
         self.connect().insert_many(data)
+
+    def insert(self, data: Dict):
+        self.connect().insert_one(data)
 
     def update(self, query: Dict, data_update: Dict):
         self.connect().update_one(query, {"$set": data_update})
@@ -37,40 +40,29 @@ class Data:
         self.connect().delete_many(query)
 
     def df(self) -> pd.DataFrame:
-        return pd.DataFrame(self.find({}, {"_id": False}))
+        return pd.DataFrame(self.find({}))
 
     def count(self, query: Dict) -> int:
         return self.connect().count_documents(query)
 
     def search(self, search: str, projection: dict = None):
-        return self.find({"$text": {"$search": search}}, projection or {"_id": False})
+        return self.find({"$text": {"$search": search}}, projection)
 
     def __str__(self):
         return f"{self.df()}"
 
+    def create_index(self):
+        self.connect().create_index([("$**", "text")])
 
-if __name__ == '__main__':
-    db = Data()
+    def delete_index(self):
+        self.connect().drop_index("$**_text")
 
-    # db.delete({})
+    def reset_db(self):
+        self.delete({})
+        self.delete_index()
+        self.create_index()
 
-    # text_index_name = list(db.connect().index_information().keys())[1]
-    # db.connect().drop_index(text_index_name)
 
-    # db.connect().create_index([("$**", "text")])
-
-    # db.insert([
-    #     {"FilePath": "S3::Documents/Images/Test00.jpg", "Content": "This is an image"},
-    #     {"FilePath": "Box::Documents/PDFs/Test01.pdf", "Content": "This is a text document"},
-    #     {"FilePath": "Box::Documents/PDFs/Test02.pdf", "Content": "This is a text document"},
-    #     {"FilePath": "Box::Documents/PDFs/Test03.pdf", "Content": "This is a text document"},
-    #     {"FilePath": "Box::Documents/PDFs/Test04.pdf", "Content": "This is a text document"},
-    # ])
-    # query = {
-    #     'id' = ['76743684225'']
-    # }
-    file_id = '23511711927'
-    result = db.find({"id": file_id}, {"_id": False})
-    print(type(result[0]))
-    for item in result:
-        print(item)
+# if __name__ == '__main__':
+#     db = Data()
+#     db.reset_db()
