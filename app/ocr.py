@@ -13,11 +13,11 @@ def ocr(bts: bytes, dpi=90) -> str:
 def ocr_conf_flag(bts: bytes, dpi=90, conf_threshold=30):
     """
     Convert pdf to document words and flag for low confidence documents.
-    Argument: 1) Byte string, output from BoxWrapper.download_file(file_id)
+    Argument: 1) bts: Byte string, output from BoxWrapper.download_file(file_id)
               2) dpi: integer, sets resolution of image converted from pdfs
               3) conf_threshold: integer, determines level of document confidence under which to set conf_flag
 
-    Returns: Document words, a flag if document confidence is less than conf_threshold
+    Returns: (Document words, a flag if document confidence is less than conf_threshold)
     """
     # pdf handler
     pages = convert_from_bytes(bts, dpi=dpi)
