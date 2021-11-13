@@ -9,7 +9,7 @@ from app.data import Data
 
 API = FastAPI(
     title='DocDB Data Science API',
-    version="0.40.6",
+    version="0.40.7",
     docs_url='/',
 )
 API.db = Data()
