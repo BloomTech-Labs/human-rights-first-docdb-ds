@@ -11,16 +11,15 @@ class Data:
     db_url = getenv("DB_URL", default="mongodb://localhost:27017/")
     db_name = getenv("DB_NAME", default="DocDB")
     db_table = getenv("DB_TABLE", default="docs")
-    default_projection = {"_id": False}
 
     def search(self, search: str):
         return self.find({"$text": {"$search": search}})
 
     def find(self, query: Dict) -> Iterator[Dict]:
-        return self.connect().find(query, self.default_projection)
+        return self.connect().find(query, {"_id": False, "text": False})
 
     def find_one(self, query: Dict) -> Optional[Dict]:
-        return self.connect().find_one(query, self.default_projection)
+        return self.connect().find_one(query, {"_id": False})
 
     def insert(self, data: Dict):
         self.connect().insert_one(data)
