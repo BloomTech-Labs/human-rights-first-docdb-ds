@@ -28,10 +28,10 @@ async def search(query: str):
     """ Returns everything but the text for all search matches
     Example: http://human-rights-first-docdb-ds-dev.us-east-1.elasticbeanstalk.com/search/London%20England
 
-    {'Response': [{'box_id': String
-    'name': String
-    'path': String
-    'url': String
+    {'Response': [{'box_id': String,
+    'name': String,
+    'path': String,
+    'url': String,
     'tags': Array of Strings}]}
     """
     return {"Response": list(API.db.search(query))}
@@ -42,11 +42,11 @@ async def lookup(file_id: str):
     """ Returns everything for a single match
     Example: http://human-rights-first-docdb-ds-dev.us-east-1.elasticbeanstalk.com/lookup/76737668329
 
-    {'Response': {'box_id': String
-    'name': String
-    'path': String
-    'url': String
-    'tags': Array of Strings
+    {'Response': {'box_id': String,
+    'name': String,
+    'path': String,
+    'url': String,
+    'tags': Array of Strings,
     'text': String}}
     """
     return {"Response": API.db.find_one({"box_id": file_id})}
