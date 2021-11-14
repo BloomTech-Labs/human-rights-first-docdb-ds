@@ -7,6 +7,7 @@ from app.data import Data
 
 box = BoxWrapper()
 db = Data()
+skip_list = ("25872996609", "25874329495")
 
 
 def update_csv(completed_type, completed_id):
@@ -56,6 +57,9 @@ def iterate_folder_items(folder_id, finished):
 
 
 def insert_record(file_id, finished):
+    if file_id in skip_list:
+        print(f"Skipping file: {file_id}")
+        return
     if file_id in finished.keys():
         print("Closed file: " + file_id)
         return
@@ -63,8 +67,10 @@ def insert_record(file_id, finished):
     if info["ext"] != "pdf":
         return
 
+    print(f"Downloading file: {file_id}")
+    file = box.download_file(file_id)
     print(f"OCR file: {file_id}")
-    ocr_text = ocr(box.download_file(file_id), dpi=300)
+    ocr_text = ocr(file, dpi=300)
     record = {
         'box_id': info['id'],
         'name': info['name'],
@@ -76,7 +82,6 @@ def insert_record(file_id, finished):
     print(f"Inserting file: {file_id}")
     db.insert(record)
     update_csv("file", file_id)
-    return
 
 
 if __name__ == '__main__':
