@@ -1,4 +1,4 @@
-from boxsdk import BoxAPIException
+from boxsdk import BoxOAuthException
 from fastapi import FastAPI
 from fastapi.responses import Response, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -59,7 +59,7 @@ async def thumbnail(file_id: str):
     """
     try:
         return Response(API.box.get_thumbnail(file_id), media_type="image/jpg")
-    except BoxAPIException:
+    except BoxOAuthException:
         return FileResponse("app/images/default.jpg", media_type="image/jpg")
 
 

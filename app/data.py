@@ -21,6 +21,9 @@ class Data:
     def find_one(self, query: Dict) -> Optional[Dict]:
         return self.connect().find_one(query, {"_id": False})
 
+    def count(self, query: Dict):
+        return self.connect().count_documents(query)
+
     def insert(self, data: Dict):
         self.connect().insert_one(data)
 
@@ -39,6 +42,6 @@ class Data:
         self.connect().create_index([("$**", "text")])
 
 
-# if __name__ == '__main__':
-#     db = Data()
-#     db.big_red_button()
+if __name__ == '__main__':
+    db = Data()
+    print(db.count({}))
