@@ -4,7 +4,7 @@ Labs DS Data Engineer Role
 - Visualization Interface
 """
 from os import getenv
-from typing import Iterator, Dict, Iterable
+from typing import Iterator, Dict, Iterable, Optional
 
 from pymongo import MongoClient
 import pandas as pd
@@ -24,6 +24,9 @@ class Data:
     def find(self, query: Dict, projection: Dict = None) -> Iterator[Dict]:
         return self.connect().find(query, projection)
 
+    def find_one(self, query: Dict, projection: dict = None) -> Optional[Dict]:
+        return self.connect().find_one(query, projection or {"_id": False})
+
     def insert(self, data: Iterable[Dict]):
         self.connect().insert_many(data)
 
@@ -39,8 +42,11 @@ class Data:
     def count(self, query: Dict) -> int:
         return self.connect().count_documents(query)
 
-    def search(self, search):
-        return self.find({"$text": {"$search": search}}, {"_id": False})
+    def search(self, search: str, projection: dict = None):
+        return self.find({"$text": {"$search": search}}, projection or {"_id": False})
+
+    def add_tag(self, file_id: str, new_tag: str):
+        self.connect().update({'id': file_id}, {'$push': {'tags': new_tag}})
 
     def __str__(self):
         return f"{self.df()}"
@@ -63,7 +69,11 @@ if __name__ == '__main__':
     #     {"FilePath": "Box::Documents/PDFs/Test03.pdf", "Content": "This is a text document"},
     #     {"FilePath": "Box::Documents/PDFs/Test04.pdf", "Content": "This is a text document"},
     # ])
-
-    result = db.search("Box")
-    for item in result:
-        print(item)
+    # query = {
+    #     'id' = ['76743684225'']
+    # }
+    # file_id = '23511711927'
+    # result = db.find({"id": file_id}, {"_id": False})
+    # print(type(result[0]))
+    # for item in result:
+    #     print(item)
