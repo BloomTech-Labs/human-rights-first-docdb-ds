@@ -2,7 +2,6 @@ import re
 import pytesseract
 from pdf2image import convert_from_bytes
 import pandas as pd
-import time
 
 
 def ocr(bts: bytes, dpi=90) -> str:
@@ -46,7 +45,6 @@ def ocr_conf_mean(bts: bytes, dpi=150):
     data_df['conf'] = data_df['conf'].astype('int')
     # get mean
     conf_mean = data_df['conf'].mean()
-    # print('CONF_MEAN: ', conf_mean) # for test
 
     # make string from column of words
     out_str = " ".join(data_df['text'].tolist())
@@ -66,29 +64,11 @@ if __name__ == '__main__':
     # file_id = "305364848415".
     #crude map with some text and labels. Mean_confidence: 29%. 1% time overhead with Mean_confidence
     # file_id = "17742201678"
-    #side_ways tabular docs. Mean_confidence: 19%. 1% time overhead with Mean_confidence
-    file_id = "8281189693"
+    #side-ways tabular docs. Mean_confidence: 19%. 1% time overhead with Mean_confidence
+    # file_id = "8281189693"
 
     pdf_bytes = box.download_file(file_id)
+    print(ocr_conf_mean(pdf_bytes, 300))
+    # print(ocr(pdf_bytes, 300))
 
-    s = time.time()
-    ocr_conf_mean(pdf_bytes, 300)
-    print('with confidence:', time.time() - s)
 
-    s = time.time()
-    ocr(pdf_bytes, 300)
-    print('without confidence:', time.time() - s)
-
-    # info = box.get_file_info(file_id)
-    # info['text'] = ocr(box.download_file(file_id), 200)
-    # for key, val in info.items():
-    #     if key == "text":
-    #         print(f"{key} : {val[:200]}")
-    #     else:
-    #         if isinstance(val, dict):
-    #             print(key + ": {")
-    #             for k, v in val.items():
-    #                 print(f"    {k} : {v}")
-    #             print("}")
-    #         else:
-    #             print(f"{key} : {val}")
