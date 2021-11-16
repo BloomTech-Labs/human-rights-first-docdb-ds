@@ -13,8 +13,8 @@ def ocr(bts: bytes, dpi=90) -> str:
 def ocr_conf_mean(bts: bytes, dpi=150):
     """
     Convert pdf to document words and mean tesseract confidence.
-    Argument: 1) bts (bytestring): Byte string, output from BoxWrapper.download_file(file_id)
-              2) dpi (int): integer, sets resolution of image converted from pdfs
+    Argument: 1) bts (bytestring): pdf byte string, output from BoxWrapper.download_file(file_id)
+              2) dpi (int): sets resolution of image converted from pdfs
 
     Returns: A tuple containing:
         1) str: String of unformated document words
