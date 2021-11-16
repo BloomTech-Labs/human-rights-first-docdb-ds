@@ -2,6 +2,7 @@ import re
 import pytesseract
 from pdf2image import convert_from_bytes
 import pandas as pd
+import time
 
 
 def ocr(bts: bytes, dpi=90) -> str:
@@ -10,14 +11,15 @@ def ocr(bts: bytes, dpi=90) -> str:
     clean_text = re.sub(r"\s+", " ", text)
     return clean_text
 
-def ocr_conf_flag(bts: bytes, dpi=90, conf_threshold=30):
+def ocr_conf_mean(bts: bytes, dpi=150):
     """
-    Convert pdf to document words and flag for low confidence documents.
-    Argument: 1) bts: Byte string, output from BoxWrapper.download_file(file_id)
-              2) dpi: integer, sets resolution of image converted from pdfs
-              3) conf_threshold: integer, determines level of document confidence under which to set conf_flag
+    Convert pdf to document words and mean tesseract confidence.
+    Argument: 1) bts (bytestring): Byte string, output from BoxWrapper.download_file(file_id)
+              2) dpi (int): integer, sets resolution of image converted from pdfs
 
-    Returns: (Document words, a flag if document confidence is less than conf_threshold)
+    Returns: A tuple containing:
+        1) str: String of unformated document words
+        2) float: Mean of document word confidences
     """
     # pdf handler
     pages = convert_from_bytes(bts, dpi=dpi)
@@ -45,12 +47,11 @@ def ocr_conf_flag(bts: bytes, dpi=90, conf_threshold=30):
     # get mean
     conf_mean = data_df['conf'].mean()
     # print('CONF_MEAN: ', conf_mean) # for test
-    # set confidence flag
-    conf_flag =  conf_mean < conf_threshold
+
     # make string from column of words
     out_str = " ".join(data_df['text'].tolist())
 
-    return out_str, conf_flag
+    return out_str, conf_mean
 
 
 
@@ -59,14 +60,24 @@ if __name__ == '__main__':
     from app.box_wrapper import BoxWrapper
 
     box = BoxWrapper()
-    # file_id = "23470520869" #legible, straight, typwritten doc. Mean confidence: 70%
-    # file_id = "305364848415" #news paper clippings, bad photos. Mean confidence: 59%
-    # file_id = "17742201678" #crude map with some text and labels. Mean_confidence: 29%
-    file_id = "8281189693" #side_ways tabular docs: 19%
+    #legible, straight, typwritten doc. Mean confidence: 70%. 9% time overhead with Mean_confidence
+    # file_id = "23470520869"
+    #news paper clippings, bad photos. Mean confidence: 59%. 6% time overhead with Mean_confidence
+    # file_id = "305364848415".
+    #crude map with some text and labels. Mean_confidence: 29%. 1% time overhead with Mean_confidence
+    # file_id = "17742201678"
+    #side_ways tabular docs. Mean_confidence: 19%. 1% time overhead with Mean_confidence
+    file_id = "8281189693"
 
     pdf_bytes = box.download_file(file_id)
 
-    print(ocr_conf_flag(pdf_bytes, 300, 40))
+    s = time.time()
+    ocr_conf_mean(pdf_bytes, 300)
+    print('with confidence:', time.time() - s)
+
+    s = time.time()
+    ocr(pdf_bytes, 300)
+    print('without confidence:', time.time() - s)
 
     # info = box.get_file_info(file_id)
     # info['text'] = ocr(box.download_file(file_id), 200)
