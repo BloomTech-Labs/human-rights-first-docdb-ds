@@ -26,7 +26,10 @@ API.add_middleware(
 @API.get("/search/{query}")
 async def search(query: str):
     """ Returns everything but the text for all search matches
+
     Example: http://human-rights-first-docdb-ds-dev.us-east-1.elasticbeanstalk.com/search/London%20England
+
+    Response Object with a Array of JSON Objects:
 
     {'Response': [{'box_id': String,
     'name': String,
@@ -40,6 +43,7 @@ async def search(query: str):
 @API.get("/lookup/{file_id}")
 async def lookup(file_id: str):
     """ Returns everything for a single match
+
     Example: http://human-rights-first-docdb-ds-dev.us-east-1.elasticbeanstalk.com/lookup/76737668329
 
     {'Response': {'box_id': String,
@@ -54,8 +58,11 @@ async def lookup(file_id: str):
 
 @API.get("/thumbnail/{file_id}")
 async def thumbnail(file_id: str):
-    """ Returns the jpg thumbnail for a single document,
-    Returns a default image if document is not found.
+    """ WORK IN PROGRESS!!!
+
+    Returns the jpg thumbnail for a single document.
+
+    Returns a default image if on Box authentication error.
     """
     try:
         return Response(API.box.get_thumbnail(file_id), media_type="image/jpg")

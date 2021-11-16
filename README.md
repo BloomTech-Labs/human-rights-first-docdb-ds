@@ -1,9 +1,4 @@
-# Basic SPA
-
-For steps on how to work with this repository [please see documentation here](https://docs.labs.lambdaschool.com/labs-spa-starter/)
-
-
-# Human Rights First Directory
+# Human Rights First DocDB
 
 You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](https://a.humanrightsfirstdocdb.dev/). <br><br>
 

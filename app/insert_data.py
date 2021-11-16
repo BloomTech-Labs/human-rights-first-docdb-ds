@@ -1,3 +1,4 @@
+""" Grabs files from Box, runs OCR on each and stores the data to MongoDB """
 from os.path import exists
 
 from app.nlp import get_tags
@@ -22,22 +23,14 @@ def get_finished():
             return finished_dict
     with open('inserted.csv', 'r') as f:
         lines = f.readlines()
-        for line in lines:
-            if ',' not in line:
-                continue
+    for line in lines:
+        if ',' in line:
             item_type, item_id = line.rstrip().split(",")
             if item_type == "file" or item_type == "folder_complete":
                 finished_dict[item_id] = 1
             else:
                 finished_dict[item_id] = 0
     return finished_dict
-
-
-def iterate_main_folder():
-    files, folders = box.items_in_folder()
-    finished = get_finished()
-    for fold in folders:
-        iterate_folder_items(fold.id, finished)
 
 
 def iterate_folder_items(folder_id, finished):
@@ -48,10 +41,10 @@ def iterate_folder_items(folder_id, finished):
     files, folders = box.items_in_folder(folder_id)
     update_csv("folder_in_progress", folder_id)
     print(f"Working on folder: {folder_id}")
-    for fold in folders:
-        iterate_folder_items(fold['id'], finished)
-    for fil in files:
-        insert_record(fil['id'], finished)
+    for folder in folders:
+        iterate_folder_items(folder['id'], finished)
+    for file in files:
+        insert_record(file['id'], finished)
     update_csv("folder_complete", folder_id)
     print(f"Completed folder: {folder_id}")
 
@@ -85,5 +78,4 @@ def insert_record(file_id, finished):
 
 
 if __name__ == '__main__':
-    fin = get_finished()
-    iterate_folder_items('855631806', finished=fin)
+    iterate_folder_items('855631806', finished=get_finished())
