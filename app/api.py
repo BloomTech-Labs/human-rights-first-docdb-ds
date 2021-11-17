@@ -62,7 +62,8 @@ async def thumbnail(file_id: str):
 
     Returns the jpg thumbnail for a single document.
 
-    Returns a default image if on Box authentication error.
+    Returns a default image if on Box authentication error. This is common
+    while we have a "free" account.
     """
     try:
         return Response(API.box.get_thumbnail(file_id), media_type="image/jpg")
