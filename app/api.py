@@ -9,7 +9,7 @@ from app.data import Data
 
 API = FastAPI(
     title='DocDB Data Science API',
-    version="0.40.7",
+    version="0.40.8",
     docs_url='/',
 )
 API.db = Data()
@@ -62,7 +62,7 @@ async def thumbnail(file_id: str):
 
     Returns the jpg thumbnail for a single document.
 
-    Returns a default image if on Box authentication error. This is common
+    Returns a default image on Box authentication error. This is common
     while we have a "free" account.
     """
     try:
