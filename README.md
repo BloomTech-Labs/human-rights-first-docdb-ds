@@ -91,7 +91,7 @@ Our research into this project stretches far and wide, covering a multitude of l
 
 ## Architecture
 
-![image info](./assets/DS_structural_diagram_v3.png)
+![image info](./assets/DS_structural_diagram_v4.png)
 ![user_flow_model](./assets/user_flow_diagram.png)
 
 # Installation Instructions
