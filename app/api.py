@@ -8,7 +8,7 @@ from app.box_wrapper import BoxWrapper
 from app.data import Data
 
 API = FastAPI(
-    title='DocDB Data Science API',
+    title='DocDB DS API',
     version="0.40.9",
     docs_url='/',
 )
