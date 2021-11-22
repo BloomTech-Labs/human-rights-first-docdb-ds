@@ -1,9 +1,11 @@
+from typing import Optional
+
 from dotenv import load_dotenv
 from os import getenv
 from boxsdk import OAuth2, Client
 
 
-base_folder_id = getenv("BASE_FOLDER_ID", default="855631806")
+base_folder_id = getenv("BASE_FOLDER_ID")
 
 
 class BoxWrapper:
@@ -14,6 +16,7 @@ class BoxWrapper:
         access_token=getenv("DEV_TOKEN"),
     )
     client = Client(auth)
+    # client = client.as_user(client.user(user_id=getenv("USER_ID")))
 
     def items_in_folder(self, folder_id: str = base_folder_id):
         items = self.client.folder(folder_id).get_items()
@@ -33,7 +36,7 @@ class BoxWrapper:
 
     def get_file_info(self, file_id: str):
         file_info = self.client.file(file_id).get()
-        path = "/".join(s.name for s in file_info.path_collection['entries'])
+        path = "/".join(s.name for s in file_info.path_collection["entries"])
         dtc = {
             "id": file_id,
             "name": file_info.name,
@@ -46,10 +49,9 @@ class BoxWrapper:
     def get_thumbnail(self, file_id):
         """ sizes of 32x32, 94x94, 160x160, 320x320 """
         file_handle = self.client.file(file_id)
-        return file_handle.get_thumbnail_representation('320x320', extension='jpg')
+        return file_handle.get_thumbnail_representation("160x160", extension="jpg")
 
-    def download_file(self, file_id: str) -> [bytes, None]:
+    def download_file(self, file_id: str) -> Optional[bytes]:
         info = self.get_file_info(file_id)
-        if info['ext'] == 'pdf':
-            cont = self.client.file(file_id).content()
-            return cont
+        if info["ext"] == "pdf":
+            return self.client.file(file_id).content()
