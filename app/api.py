@@ -9,7 +9,7 @@ from app.data import Data
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.40.9",
+    version="0.40.11",
     docs_url='/',
 )
 API.db = Data()
@@ -37,7 +37,7 @@ async def search(query: str):
     'url': String,
     'tags': Array of Strings}]}
     """
-    return {"Response": list(API.db.search(query))}
+    return {"Response": list(API.db.search(query))[:30]}
 
 
 @API.get("/lookup/{file_id}")
@@ -68,7 +68,7 @@ async def thumbnail(file_id: str):
     try:
         return Response(API.box.get_thumbnail(file_id), media_type="image/jpg")
     except BoxOAuthException:
-        return FileResponse("app/images/default.jpg", media_type="image/jpg")
+        return FileResponse("app/images/default-160x160.jpg", media_type="image/jpg")
 
 
 if __name__ == '__main__':
