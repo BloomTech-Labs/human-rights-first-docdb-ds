@@ -8,7 +8,10 @@ from app.data import Data
 
 box = BoxWrapper()
 db = Data()
-skip_list = ("25872996609", "25874329495", "25921860097")
+skip_list = (
+    "25872996609", "25874329495", "25921860097",
+    "455230304948", "455231112224",
+)
 
 
 def update_csv(completed_type, completed_id):
