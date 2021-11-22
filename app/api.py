@@ -9,7 +9,7 @@ from app.data import Data
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.40.12",
+    version="0.40.13",
     docs_url='/',
 )
 API.db = Data()
@@ -37,7 +37,7 @@ async def search(query: str):
     'url': String,
     'tags': Array of Strings}]}
     """
-    return {"Response": list(API.db.search(query)[:30])}
+    return {"Response": list(API.db.search(query)[:32])}
 
 
 @API.get("/lookup/{file_id}")
