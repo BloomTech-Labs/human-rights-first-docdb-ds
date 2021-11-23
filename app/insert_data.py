@@ -9,25 +9,24 @@ from app.data import Data
 box = BoxWrapper()
 db = Data()
 skip_list = (
-    "25872996609", "25874329495", "25921860097",
-    "455230304948", "455231112224",
+    "25872996609", "25874329495", "25921860097", "455230304948", "455231112224",
 )
 
 
 def update_csv(completed_type, completed_id):
-    with open('inserted.csv', 'a') as f:
+    with open("inserted.csv", "a") as f:
         f.write(f"{completed_type},{completed_id}\n")
 
 
 def get_finished():
     finished_dict = {}
-    if not exists('inserted.csv'):
-        with open('inserted.csv', 'w'):
+    if not exists("inserted.csv"):
+        with open("inserted.csv", "w"):
             return finished_dict
-    with open('inserted.csv', 'r') as f:
+    with open("inserted.csv", "r") as f:
         lines = f.readlines()
     for line in lines:
-        if ',' in line:
+        if "," in line:
             item_type, item_id = line.rstrip().split(",")
             if item_type == "file" or item_type == "folder_complete":
                 finished_dict[item_id] = 1
@@ -45,9 +44,9 @@ def iterate_folder_items(folder_id, finished):
     update_csv("folder_in_progress", folder_id)
     print(f"Working on folder: {folder_id}")
     for folder in folders:
-        iterate_folder_items(folder['id'], finished)
+        iterate_folder_items(folder["id"], finished)
     for file in files:
-        insert_record(file['id'], finished)
+        insert_record(file["id"], finished)
     update_csv("folder_complete", folder_id)
     print(f"Completed folder: {folder_id}")
 
@@ -68,17 +67,17 @@ def insert_record(file_id, finished):
     print(f"OCR file: {file_id}")
     ocr_text = ocr(file, dpi=300)
     record = {
-        'box_id': info['id'],
-        'name': info['name'],
-        'path': info['path'],
-        'url': info['url'],
-        'text': ocr_text,
-        'tags': get_tags(ocr_text),
+        "box_id": info["id"],
+        "name": info["name"],
+        "path": info["path"],
+        "url": info["url"],
+        "text": ocr_text,
+        "tags": get_tags(ocr_text),
     }
     print(f"Inserting file: {file_id}")
     db.insert(record)
     update_csv("file", file_id)
 
 
-if __name__ == '__main__':
-    iterate_folder_items('855631806', finished=get_finished())
+if __name__ == "__main__":
+    iterate_folder_items("855631806", finished=get_finished())
