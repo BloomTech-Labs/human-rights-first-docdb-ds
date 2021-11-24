@@ -97,18 +97,24 @@ Our research into this project stretches far and wide, covering a multitude of l
   - Tesseract
   - Plotly  
 
-
-## Docker
-### Build Docker
+## Local Setup
+Clone the repo as usual, then cd into the project and create a virtual environment:
 ```
-docker build . -t docdb
+python -m venv venv
 ```
-
-### Run Docker
+On Windows, run:
 ```
-docker run -it -p 3000:3000 docdb uvicorn app.api:API --host=0.0.0.0 --port=3000
+venv\Scripts\activate.bat
 ```
-
+On Linux, Unix or MacOS, run:
+```
+source venv/bin/activate
+```
+Install dependencies:
+```
+pip install -r requirements.txt
+```
+* Some operating systems refer to python as python3 and pip as pip3.
 
 # Contributing
 
