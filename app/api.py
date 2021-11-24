@@ -1,4 +1,4 @@
-from boxsdk import BoxOAuthException
+from boxsdk import BoxOAuthException, BoxAPIException
 from fastapi import FastAPI
 from fastapi.responses import Response, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -62,11 +62,13 @@ async def thumbnail(file_id: str):
 
     Returns the jpg thumbnail for a single document.
 
-    Returns a default image on Box authentication error. This is common
-    while we have a "free" account.
+    Returns a default image on Box error.
+    This is common while we have a "developer" Box account.
     """
     try:
         return Response(API.box.get_thumbnail(file_id), media_type="image/jpg")
+    except BoxAPIException:
+        return FileResponse("app/images/default-160x160.jpg", media_type="image/jpg")
     except BoxOAuthException:
         return FileResponse("app/images/default-160x160.jpg", media_type="image/jpg")
 

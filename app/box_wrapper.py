@@ -16,7 +16,6 @@ class BoxWrapper:
         access_token=getenv("DEV_TOKEN"),
     )
     client = Client(auth)
-    # client = client.as_user(client.user(user_id=getenv("USER_ID")))
 
     def items_in_folder(self, folder_id: str = base_folder_id):
         items = self.client.folder(folder_id).get_items()
@@ -30,7 +29,7 @@ class BoxWrapper:
             }
             if item.type == "file":
                 files.append(dtc)
-            else:
+            elif item.type == "folder":
                 folders.append(dtc)
         return files, folders
 
