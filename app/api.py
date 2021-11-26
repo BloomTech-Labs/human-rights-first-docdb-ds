@@ -1,5 +1,5 @@
 from boxsdk import BoxOAuthException, BoxAPIException
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from fastapi.responses import Response, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
@@ -71,6 +71,18 @@ async def thumbnail(file_id: str):
         return FileResponse("app/images/default-160x160.jpg", media_type="image/jpg")
     except BoxOAuthException:
         return FileResponse("app/images/default-160x160.jpg", media_type="image/jpg")
+
+
+@API.post("/add_tag")
+async def add_tag(file_id: str = Form(...), tag: str = Form(...)):
+    API.db.add_tag(file_id, tag)
+    return {'Result': 'Success', "file_id": file_id, "tag": tag}
+
+
+@API.delete("/remove_tag")
+async def remove_tag(file_id: str = Form(...), tag: str = Form(...)):
+    API.db.remove_tag(file_id, tag)
+    return {'Result': 'Success', "file_id": file_id, "tag": tag}
 
 
 if __name__ == '__main__':
