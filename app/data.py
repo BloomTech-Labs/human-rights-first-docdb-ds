@@ -36,7 +36,7 @@ class Data:
     def connect(self):
         return MongoClient(self.db_url)[self.db_name][self.db_table]
 
-    # def big_red_button(self):
+    # def _big_red_button(self):
     #     self.delete({})
     #     self.connect().drop_index("$**_text")
     #     self.connect().create_index([("$**", "text")])

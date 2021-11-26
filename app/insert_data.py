@@ -8,10 +8,6 @@ from app.data import Data
 
 box = BoxWrapper()
 db = Data()
-skip_list = (
-    "25872996609", "25874329495", "25921860097", "455230304948", "455231112224",
-    "8648288919", "8649147993",
-)
 
 
 def update_csv(completed_type, completed_id):
@@ -53,9 +49,6 @@ def iterate_folder_items(folder_id, finished):
 
 
 def insert_record(file_id, finished):
-    if file_id in skip_list:
-        print(f"Skipping file: {file_id}")
-        return
     if file_id in finished.keys():
         print("Closed file: " + file_id)
         return
