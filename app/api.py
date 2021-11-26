@@ -75,12 +75,14 @@ async def thumbnail(file_id: str):
 
 @API.post("/add_tag")
 async def add_tag(file_id: str = Form(...), tag: str = Form(...)):
+    """ Adds a custom tag to a document """
     API.db.add_tag(file_id, tag)
     return {'Result': 'Success', "file_id": file_id, "tag": tag}
 
 
 @API.delete("/remove_tag")
 async def remove_tag(file_id: str = Form(...), tag: str = Form(...)):
+    """ Removes a tag from a document """
     API.db.remove_tag(file_id, tag)
     return {'Result': 'Success', "file_id": file_id, "tag": tag}
 
