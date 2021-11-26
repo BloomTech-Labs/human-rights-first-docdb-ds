@@ -36,6 +36,9 @@ class Data:
     def connect(self):
         return MongoClient(self.db_url)[self.db_name][self.db_table]
 
+    def add_tag(self, file_id: str, new_tag: str):
+        self.connect().update({'id': file_id}, {'$push': {'tags': new_tag}})
+
     # def _big_red_button(self):
     #     self.delete({})
     #     self.connect().drop_index("$**_text")
