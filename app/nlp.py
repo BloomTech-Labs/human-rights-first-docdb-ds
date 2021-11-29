@@ -1,6 +1,7 @@
 from typing import List
 
 import spacy
+import pytextrank
 
 from app.box_wrapper import BoxWrapper
 from app.ocr import ocr
