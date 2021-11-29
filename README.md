@@ -1,9 +1,4 @@
-# Basic SPA
-
-For steps on how to work with this repository [please see documentation here](https://docs.labs.lambdaschool.com/labs-spa-starter/)
-
-
-# Human Rights First Directory
+# Human Rights First DocDB
 
 You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](https://a.humanrightsfirstdocdb.dev/). <br><br>
 
@@ -102,18 +97,24 @@ Our research into this project stretches far and wide, covering a multitude of l
   - Tesseract
   - Plotly  
 
-
-## Docker
-### Build Docker
+## Local Setup
+Clone the repo as usual, then cd into the project and create a virtual environment:
 ```
-docker build . -t docdb
+python -m venv venv
 ```
-
-### Run Docker
+On Windows, run:
 ```
-docker run -it -p 3000:3000 docdb uvicorn app.api:API --host=0.0.0.0 --port=3000
+venv\Scripts\activate.bat
 ```
-
+On Linux, Unix or MacOS, run:
+```
+source venv/bin/activate
+```
+Install dependencies:
+```
+pip install -r requirements.txt
+```
+Some operating systems refer to python as python3 and pip as pip3.
 
 # Contributing
 
@@ -142,7 +143,6 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 #### Pull Request Guidelines
 
-- Update the README.md with details of changes to the interface, including new plist variables, exposed ports, useful file locations and container parameters.
+- Update the README.md with details of changes to the interface.
 - Ensure that your code conforms to our existing code conventions and test coverage.
 - Include the relevant issue number, if applicable.
-- You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.

@@ -52,23 +52,9 @@ def ocr_conf_mean(bts: bytes, dpi=150):
     return out_str, conf_mean
 
 
-
-
 if __name__ == '__main__':
     from app.box_wrapper import BoxWrapper
 
     box = BoxWrapper()
-    #legible, straight, typwritten doc. Mean confidence: 70%. 9% time overhead with Mean_confidence
-    # file_id = "23470520869"
-    #news paper clippings, bad photos. Mean confidence: 59%. 6% time overhead with Mean_confidence
-    # file_id = "305364848415".
-    #crude map with some text and labels. Mean_confidence: 29%. 1% time overhead with Mean_confidence
-    # file_id = "17742201678"
-    #side-ways tabular docs. Mean_confidence: 19%. 1% time overhead with Mean_confidence
-    # file_id = "8281189693"
-
-    pdf_bytes = box.download_file(file_id)
-    print(ocr_conf_mean(pdf_bytes, 300))
-    # print(ocr(pdf_bytes, 300))
-
-
+    file_id = "23470520869"
+    print(ocr(box.download_file(file_id), 300))
