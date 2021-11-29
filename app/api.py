@@ -9,7 +9,7 @@ from app.data import Data
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.41.0",
+    version="0.41.1",
     docs_url='/',
 )
 API.db = Data()
@@ -27,7 +27,7 @@ API.add_middleware(
 async def search(query: str):
     """ Returns everything but the text for all search matches
 
-    Example: http://human-rights-first-docdb-ds-dev.us-east-1.elasticbeanstalk.com/search/London%20England
+    Example: https://ds.humanrightsfirstdocdb.dev/search/London%20England
 
     Response Object with a Array of JSON Objects:
 
@@ -44,7 +44,7 @@ async def search(query: str):
 async def lookup(file_id: str):
     """ Returns everything for a single match
 
-    Example: http://human-rights-first-docdb-ds-dev.us-east-1.elasticbeanstalk.com/lookup/76737668329
+    Example: https://ds.humanrightsfirstdocdb.dev/lookup/76737668329
 
     {'Response': {'box_id': String,
     'name': String,
