@@ -1,6 +1,8 @@
 # Human Rights First DocDB
 
-You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](https://a.humanrightsfirstdocdb.dev/). <br><br>
+Deployed App: [https://a.humanrightsfirstdocdb.dev](https://a.humanrightsfirstdocdb.dev)
+
+Deployed DS API: [https://ds.humanrightsfirstdocdb.dev](https://ds.humanrightsfirstdocdb.dev)
 
 
 ## Contributors
@@ -54,12 +56,9 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 
 
 ### Getting Started
-- Fork and clone the repo to install it as your own remote.
+- Clone the repo to install it as your own remote.
   - **note** please [be sure to set your remote](https://help.github.jp/enterprise/2.11/user/articles/changing-a-remote-s-url/) for this repo to point to your Labs Team Repository.
-- run: `pip install` to download all dependencies.
-
-
-
+- run: `pip install -r requirements.txt` to download all dependencies.
 
 
 ### Key Features
@@ -70,10 +69,8 @@ You can find the deployed project at [https://a.humanrightsfirstdocdb.dev/](http
 - built in search algorithms for pulling in necessary information
 
 
-
 ## Research
 Our research into this project stretches far and wide, covering a multitude of libraries. To better consolidate space, you can find our research [here](./assets/research.md)
-
 
 
 # Tech Stack
