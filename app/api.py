@@ -87,5 +87,11 @@ async def remove_tag(file_id: str = Form(...), tag: str = Form(...)):
     return {'Result': 'Success', "file_id": file_id, "tag": tag}
 
 
+
+@API.put("/add_tag/{file_id}{new_tag}")
+async def add_tag(file_id: str, new_tag: str):
+    API.db.add_tag(file_id, new_tag)
+    return {'Result': 'Success'}
+
 if __name__ == '__main__':
     uvicorn.run(API)
