@@ -87,5 +87,9 @@ async def remove_tag(file_id: str = Form(...), tag: str = Form(...)):
     return {'Result': 'Success', "file_id": file_id, "tag": tag}
 
 
+@API.get("/backup")
+async def backup():
+    return API.db.backup()
+
 if __name__ == '__main__':
     uvicorn.run(API)

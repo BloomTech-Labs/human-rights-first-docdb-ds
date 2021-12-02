@@ -1,5 +1,5 @@
 from os import getenv
-from typing import Iterator, Dict, Optional
+from typing import Iterator, Dict, Optional, List
 
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -42,12 +42,10 @@ class Data:
     def remove_tag(self, box_id: str, tag: str):
         self.connect().update({'box_id': box_id}, {'$pull': {'tags': tag}})
 
-    # def _big_red_button(self):
-    #     self.delete({})
-    #     self.connect().drop_index("$**_text")
-    #     self.connect().create_index([("$**", "text")])
+    def backup(self) -> List[Dict]:
+        return list(self.connect().find({}, {"_id": False}))
 
 
 if __name__ == '__main__':
     db = Data()
-    print(db.count({}))
+    print(db.backup())
