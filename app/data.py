@@ -49,6 +49,7 @@ class Data:
         with open(file_name, "w") as file:
             json.dump(data, file)
 
+
 if __name__ == '__main__':
     db = Data()
-    print(db.backup())
+    db.backup()
