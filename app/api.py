@@ -87,10 +87,5 @@ async def remove_tag(file_id: str = Form(...), tag: str = Form(...)):
     return {'Result': 'Success', "file_id": file_id, "tag": tag}
 
 
-@API.get("/backup")
-async def backup():
-    """ Creates a backup of the current Mongo Database """
-    return API.db.backup()
-
 if __name__ == '__main__':
     uvicorn.run(API)

@@ -1,3 +1,4 @@
+import json
 from os import getenv
 from typing import Iterator, Dict, Optional, List
 
@@ -42,9 +43,11 @@ class Data:
     def remove_tag(self, box_id: str, tag: str):
         self.connect().update({'box_id': box_id}, {'$pull': {'tags': tag}})
 
-    def backup(self) -> List[Dict]:
-        return list(self.connect().find({}, {"_id": False}))
-
+    def backup(self):
+        data = list(self.connect().find({}, {"_id": False}))
+        file_name = "data.json"
+        with open(file_name, "w") as file:
+            json.dump(data, file)
 
 if __name__ == '__main__':
     db = Data()
