@@ -111,6 +111,10 @@ Install dependencies:
 ```
 pip install -r requirements.txt
 ```
+Run API locally:
+```
+python -m app.api
+```
 Some operating systems refer to python as python3 and pip as pip3.
 
 # Contributing
