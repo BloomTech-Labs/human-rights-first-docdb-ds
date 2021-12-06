@@ -2,3 +2,5 @@
 /venv/
 .ipynb_checkpoints/
 app/__pycache__/
+Pipfile
+Pipfile.lock
