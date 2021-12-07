@@ -27,8 +27,6 @@ API.add_middleware(
 async def search(query: str, page_number: int = 0, objects_per_page: int = 32):
     """ Returns everything but the text for all search matches
 
-    Example: https://ds.humanrightsfirstdocdb.dev/search/London%20England
-
     Response Object with a Array of JSON Objects:
 
     {'Response': [{'box_id': String,
