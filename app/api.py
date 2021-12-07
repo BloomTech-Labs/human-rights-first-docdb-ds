@@ -1,8 +1,9 @@
-from boxsdk import BoxOAuthException, BoxAPIException
+import os
+from math import ceil
+
 from fastapi import FastAPI, Form
-from fastapi.responses import Response, FileResponse
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 
 from app.box_wrapper import BoxWrapper
 from app.data import Data
@@ -24,15 +25,13 @@ API.add_middleware(
 
 
 @API.post("/search")
-async def search(query: str, page_number: int = 0, objects_per_page: int = 32):
-    """ Returns everything but the text for all search matches
-
-    Response with an Array of JSON Objects
-    """
-    start = page_number * objects_per_page
-    stop = start + objects_per_page
-    search_result = API.db.search(query)[start:stop]
-    return {"Response": list(search_result)}
+async def search(query: str, page_number: int = 0, results_per_page: int = 100):
+    start = page_number * results_per_page
+    stop = start + results_per_page
+    search_results = API.db.search(query)[start:stop]
+    count = API.db.count({"$text": {"$search": query}})
+    n_pages = ceil(count / results_per_page)
+    return {"Pages": n_pages, "Count": count, "Response": list(search_results)}
 
 
 @API.get("/lookup/{file_id}")
@@ -53,19 +52,14 @@ async def lookup(file_id: str):
 
 @API.get("/thumbnail/{file_id}")
 async def thumbnail(file_id: str):
-    """ WORK IN PROGRESS!!!
-
-    Returns the jpg thumbnail for a single document.
-
-    Returns a default image on Box error.
-    This is common while we have a "developer" Box account.
+    """ Returns the jpg thumbnail for a single document.
+    Returns default image on error.
     """
-    try:
-        return Response(API.box.get_thumbnail(file_id), media_type="image/jpg")
-    except BoxAPIException:
-        return FileResponse("app/images/default-160x160.jpg", media_type="image/jpg")
-    except BoxOAuthException:
-        return FileResponse("app/images/default-160x160.jpg", media_type="image/jpg")
+    file_path = f"app/thumbnails/{file_id}.jpg"
+    if os.path.exists(file_path):
+        return FileResponse(file_path, media_type="image/jpg")
+    else:
+        return FileResponse("app/thumbnails/default.jpg", media_type="image/jpg")
 
 
 @API.post("/add_tag")
@@ -83,4 +77,5 @@ async def remove_tag(file_id: str = Form(...), tag: str = Form(...)):
 
 
 if __name__ == '__main__':
+    import uvicorn
     uvicorn.run(API)
