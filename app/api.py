@@ -27,13 +27,7 @@ API.add_middleware(
 async def search(query: str, page_number: int = 0, objects_per_page: int = 32):
     """ Returns everything but the text for all search matches
 
-    Response Object with a Array of JSON Objects:
-
-    {'Response': [{'box_id': String,
-    'name': String,
-    'path': String,
-    'url': String,
-    'tags': Array of Strings}]}
+    Response with an Array of JSON Objects
     """
     start = page_number * objects_per_page
     stop = start + objects_per_page
