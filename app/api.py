@@ -9,7 +9,7 @@ from app.data import Data
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.41.2",
+    version="0.41.3",
     docs_url='/',
 )
 API.db = Data()
@@ -23,8 +23,8 @@ API.add_middleware(
 )
 
 
-@API.get("/search/{query}")
-async def search(query: str):
+@API.post("/search")
+async def search(query: str, page_number: int = 0, objects_per_page: int = 32):
     """ Returns everything but the text for all search matches
 
     Example: https://ds.humanrightsfirstdocdb.dev/search/London%20England
@@ -37,7 +37,10 @@ async def search(query: str):
     'url': String,
     'tags': Array of Strings}]}
     """
-    return {"Response": list(API.db.search(query)[:32])}
+    start = page_number * objects_per_page
+    stop = start + objects_per_page
+    search_result = API.db.search(query)[start:stop]
+    return {"Response": list(search_result)}
 
 
 @API.get("/lookup/{file_id}")
