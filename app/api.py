@@ -5,7 +5,6 @@ from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.box_wrapper import BoxWrapper
 from app.data import Data
 
 API = FastAPI(
@@ -14,7 +13,6 @@ API = FastAPI(
     docs_url='/',
 )
 API.db = Data()
-API.box = BoxWrapper()
 API.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
