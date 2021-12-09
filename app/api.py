@@ -24,7 +24,7 @@ API.add_middleware(
 )
 
 
-@API.get("/search")
+@API.get("/search/{query}")
 async def get_search(query: str):
     """ Deprecated """
     return {"Response": list(API.db.search(query)[:32])}
