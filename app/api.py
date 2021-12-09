@@ -24,6 +24,11 @@ API.add_middleware(
 )
 
 
+@API.get("/search")
+async def get_search(query: str):
+    return {"Response": list(API.db.search(query)[:32])}
+
+
 @API.post("/search")
 async def search(query: str, page_number: int = 0, results_per_page: int = 100):
     start = page_number * results_per_page
