@@ -5,16 +5,14 @@ from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.box_wrapper import BoxWrapper
 from app.data import Data
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.41.3",
+    version="0.41.6",
     docs_url='/',
 )
 API.db = Data()
-API.box = BoxWrapper()
 API.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -22,6 +20,12 @@ API.add_middleware(
     allow_methods=['*'],
     allow_headers=['*'],
 )
+
+
+@API.get("/search/{query}")
+async def get_search(query: str):
+    """ Deprecated """
+    return {"Response": list(API.db.search(query)[:32])}
 
 
 @API.post("/search")
