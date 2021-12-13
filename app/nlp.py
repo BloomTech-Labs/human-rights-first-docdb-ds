@@ -1,10 +1,9 @@
 from typing import List
 
+import requests
 import spacy
 import pytextrank
 
-from app.box_wrapper import BoxWrapper
-from app.ocr import ocr
 
 nlp = spacy.load("en_core_web_sm")
 nlp.add_pipe("positionrank")  # requires `import pytextrank`
@@ -23,7 +22,9 @@ def get_tags(text: str) -> List[str]:
 
 
 if __name__ == '__main__':
-    box = BoxWrapper()
-    file_id = "23470520869"
-    raw_text = ocr(box.download_file(file_id), 300)
-    print(get_tags(raw_text))
+    file_ids = ["23470520869", "455229161973"]
+    for file_id in file_ids:
+        result = requests.get(f"https://ds.humanrightsfirstdocdb.dev/lookup/{file_id}")
+        raw_text = result.json()["Response"]["text"]
+        # print(raw_text)
+        print(get_tags(raw_text))
