@@ -7,18 +7,16 @@ Deployed DS API: [https://ds.humanrightsfirstdocdb.dev](https://ds.humanrightsfi
 
 ## Contributors
 
-### LABS FT 41
-[Matt Clibanoff]()
+#### LABS FT 41
+[Grant Ho](https://github.com/Grantzho)
 
-[Grant Ho]()
+[Royce Roberts](https://github.com/jinjahninjah)
 
-[Royce Roberts]()
+[Luke Sislowski](https://github.com/LSislowski)
 
-[Luke Sislowski]()
+[Xiao Song](https://github.com/xsong0306)
 
-[Xiao Song]()
-
-### LABS FT 40
+#### LABS FT 40
 [Alex Lucchesi](https://github.com/lucchesia7) 
 
 [Alyssa Murray](https://github.com/dagtag)  
