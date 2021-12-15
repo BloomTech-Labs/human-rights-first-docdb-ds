@@ -3,6 +3,7 @@ from typing import List
 import yake
 
 from app.data import Data
+from app.nlp import get_tags
 
 
 def get_keywords(text: str, max_ngram: int, n_keywords: int) -> List[str]:
@@ -20,5 +21,5 @@ if __name__ == '__main__':
     data = db.find({})[:5]
     for d in data:
         print(f"\nBox_id: {d['box_id']}")
-        print(f"Old Tags: {d['tags']}")
-        print(f"New Tags: {get_keywords(d['text'], max_ngram=5, n_keywords=5)}")
+        print(f"Old Tags: {get_tags(d['text'])}")
+        print(f"New Tags: {d['tags']}")
