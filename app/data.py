@@ -1,6 +1,6 @@
 import json
 from os import getenv
-from typing import Iterator, Dict, Optional, List
+from typing import Iterator, Dict, Optional
 
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -14,10 +14,13 @@ class Data:
     db_table = getenv("DB_TABLE", default="docs")
 
     def search(self, search: str):
-        return self.find({"$text": {"$search": search}})
+        return self.connect().find(
+            {"$text": {"$search": search}},
+            {"_id": False, "text": False},
+        )
 
     def find(self, query: Dict) -> Iterator[Dict]:
-        return self.connect().find(query, {"_id": False, "text": False})
+        return self.connect().find(query, {"_id": False})
 
     def find_one(self, query: Dict) -> Optional[Dict]:
         return self.connect().find_one(query, {"_id": False})
@@ -52,4 +55,4 @@ class Data:
 
 if __name__ == '__main__':
     db = Data()
-    db.backup()
+    # db.backup()
