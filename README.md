@@ -111,8 +111,25 @@ Install dependencies:
 ```
 pip install -r requirements.txt
 ```
+Run API locally:
+```
+$ uvicorn app.api:API --reload
+```
 Some operating systems refer to python as python3 and pip as pip3.
 
+# Git
+Clone the repo:
+```
+git clone https://github.com/BloomTech-Labs/human-rights-first-docdb-ds
+```
+Git checkout:
+```
+git checkout -b feature/<your-feature>
+```
+Make Changes: add features etc:
+```
+git push origin feature/<your-feature>
+```
 # Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
