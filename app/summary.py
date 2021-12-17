@@ -1,19 +1,23 @@
 from gensim.summarization.summarizer import summarize
 
 from app.data import Data
-from app.keywords import get_keywords
 
 
-def summary(text: str, word_count: int) -> str:
-    return summarize(text, word_count=word_count).replace("\n", " ").strip()
+def summary(text: str, word_count: int = 150) -> str:
+    error_text = "No Summary Available"
+    try:
+        output = summarize(
+            text,
+            word_count=word_count,
+        ).replace("\n", " ").strip()
+        return output or error_text
+    except ValueError:
+        return error_text
 
 
 if __name__ == '__main__':
     db = Data()
-    data = db.find({"$text": {"$search": "rubber bullets"}})[:10]
-
-    for d in data:
-        print(f"\nBox_id: {d['box_id']}")
-        print(f"Old Path: {d['path']}")
-        print(f"New Path: {'/'.join(d['path'].split('/')[2:])}")
-        print(f"Summary: {summary(d['text'], word_count=150)}")
+    # for idx, d in enumerate(db.find_all(), 1):
+    #     db.update({"box_id": d["box_id"]}, {"summary": summary(d["text"])})
+    #     print(f"{idx}: {d['box_id']}")
+    print(db.count({"summary": "No Summary Available"}))

@@ -9,7 +9,7 @@ from app.data import Data
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.41.8",
+    version="0.41.9",
     docs_url='/',
 )
 API.db = Data()
@@ -46,6 +46,7 @@ async def lookup(file_id: str):
 
     {'Response': {'box_id': String,
     'name': String,
+    'summary': String,
     'path': String,
     'url': String,
     'tags': Array of Strings,
