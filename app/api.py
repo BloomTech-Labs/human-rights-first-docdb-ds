@@ -9,7 +9,7 @@ from app.data import Data
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.41.9",
+    version="0.41.10",
     docs_url='/',
 )
 API.db = Data()
@@ -75,7 +75,7 @@ async def add_tag(file_id: str = Form(...), tag: str = Form(...)):
 
 
 @API.delete("/remove_tag")
-async def remove_tag(file_id: str = Form(...), tag: str = Form(...)):
+async def remove_tag(file_id: str, tag: str):
     """ Removes a tag from a document """
     API.db.remove_tag(file_id, tag)
     return {'Result': 'Success', "file_id": file_id, "tag": tag}
