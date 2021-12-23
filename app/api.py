@@ -9,7 +9,7 @@ from app.data import Data
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.41.10",
+    version="0.41.11",
     docs_url='/',
 )
 API.db = Data()
@@ -79,6 +79,16 @@ async def remove_tag(file_id: str, tag: str):
     """ Removes a tag from a document """
     API.db.remove_tag(file_id, tag)
     return {'Result': 'Success', "file_id": file_id, "tag": tag}
+
+
+@API.get("/raw_text/{file_id}")
+async def raw_text(file_id: str):
+    file_path = f"app/text-files/{file_id}.txt"
+
+    with open(file_path, 'w') as f:
+        f.write(API.db.find_one({"box_id": file_id})["text"])
+
+    return FileResponse(file_path, media_type="text/txt")
 
 
 if __name__ == '__main__':
