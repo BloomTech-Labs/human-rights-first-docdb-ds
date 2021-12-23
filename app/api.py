@@ -84,7 +84,7 @@ async def remove_tag(file_id: str, tag: str):
 @API.get("/raw_text/{file_id}")
 async def raw_text(file_id: str):
     file = API.db.find_one({"box_id": file_id})
-    file_name = file['name'].replace('.pdf', '.txt')
+    file_name = file["name"].replace(".pdf", ".txt")
     file_path = f"app/text-files/{file_name}"
 
     with open(file_path, 'w') as f:
