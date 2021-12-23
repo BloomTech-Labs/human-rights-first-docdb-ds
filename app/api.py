@@ -86,11 +86,9 @@ async def raw_text(file_id: str):
     file = API.db.find_one({"box_id": file_id})
     file_name = file["name"].replace(".pdf", ".txt")
     file_path = f"app/text-files/{file_name}"
-
     with open(file_path, "w") as f:
         f.write(file["text"])
-
-    return FileResponse(file_path, media_type="text/txt")
+    return FileResponse(file_path, media_type="text/plain")
 
 
 if __name__ == '__main__':
