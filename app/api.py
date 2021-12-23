@@ -9,7 +9,7 @@ from app.data import Data
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.41.11",
+    version="0.41.12",
     docs_url='/',
 )
 API.db = Data()
@@ -87,7 +87,7 @@ async def raw_text(file_id: str):
     file_path = f"app/text-files/{file['name'].replace('.pdf', '.txt')}"
 
     with open(file_path, 'w') as f:
-        f.write(API.db.find_one({"box_id": file_id})["text"])
+        f.write(file["text"])
 
     return FileResponse(file_path, media_type="text/txt")
 
