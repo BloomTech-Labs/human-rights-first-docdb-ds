@@ -10,7 +10,7 @@ from app.mongo import MongoDB
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.42.1",
+    version="1.0.0",
     docs_url='/',
 )
 API.db = MongoDB()
