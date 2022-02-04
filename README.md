@@ -128,6 +128,13 @@ docker build . -t docdb
 docker run -it -p 5000:5000 docdb uvicorn app.api:API --host=0.0.0.0 --port=5000
 ```
 
+## AWS Elastic Beanstalk Deployment
+```
+eb init
+eb create
+eb deploy
+```
+
 # Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
