@@ -1,25 +1,21 @@
 from typing import List
 
-import spacy
-import pytextrank
+import yake
 
 from app.box_wrapper import BoxWrapper
 from app.ocr import ocr
 
-nlp = spacy.load("en_core_web_sm")
-nlp.add_pipe("positionrank")  # requires `import pytextrank`
-custom_stopwords = {
-    "page", "secret", "document", ":", ";", "_", "|", "/", "\\", "| |",
-}
-stopwords = nlp.Defaults.stop_words.union(custom_stopwords)
-
 
 def get_tags(text: str) -> List[str]:
-    doc = nlp(text)
-    return [
-        phrase.text for phrase in doc._.phrases[:20]
-        if phrase.text.lower() not in stopwords
-    ][:10]
+    language = "en"
+    max_ngram_size = 5
+    deduplication_threshold = 0.3
+    num_keywords = 7
+    custom_kw_extractor = yake.KeywordExtractor(lan=language, n=max_ngram_size,
+                                                dedupLim=deduplication_threshold, top=num_keywords, features=None)
+    keywords = custom_kw_extractor.extract_keywords(text)
+
+    return [s[0] for s in sorted(keywords, key=lambda s: s[1])]
 
 
 if __name__ == '__main__':
