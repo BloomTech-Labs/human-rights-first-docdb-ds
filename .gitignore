@@ -1,6 +1,6 @@
 .env
 /venv/
-.ipynb_checkpoints/
-app/__pycache__/
-Pipfile
-Pipfile.lock
+/.elasticbeanstalk/
+*/__pycache__
+run.sh
+start.sh

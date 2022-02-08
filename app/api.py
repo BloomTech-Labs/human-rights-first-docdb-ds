@@ -5,14 +5,17 @@ from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.data import Data
+from app.aws_s3 import S3
+from app.mongo import MongoDB
 
 API = FastAPI(
     title='DocDB DS API',
-    version="0.41.6",
+    version="1.0.0",
     docs_url='/',
 )
-API.db = Data()
+API.db = MongoDB()
+API.s3 = S3()
+
 API.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -22,10 +25,9 @@ API.add_middleware(
 )
 
 
-@API.get("/search/{query}")
-async def get_search(query: str):
-    """ Deprecated """
-    return {"Response": list(API.db.search(query)[:32])}
+@API.get("/version")
+async def version():
+    return API.version
 
 
 @API.post("/search")
@@ -46,6 +48,7 @@ async def lookup(file_id: str):
 
     {'Response': {'box_id': String,
     'name': String,
+    'summary': String,
     'path': String,
     'url': String,
     'tags': Array of Strings,
@@ -59,27 +62,35 @@ async def thumbnail(file_id: str):
     """ Returns the jpg thumbnail for a single document.
     Returns default image on error.
     """
-    file_path = f"app/thumbnails/{file_id}.jpg"
+    file_name = f"{file_id}.jpg"
+    file_path = f"app/thumbnails/{file_name}"
+    if not os.path.exists(file_path):
+        API.s3.download("docdb-thumbnails", file_name, file_path)
     if os.path.exists(file_path):
         return FileResponse(file_path, media_type="image/jpg")
     else:
         return FileResponse("app/thumbnails/default.jpg", media_type="image/jpg")
 
 
+@API.get("/raw_text/{file_id}")
+async def raw_text(file_id: str):
+    file = API.db.find_one({"box_id": file_id})
+    file_name = file["name"].replace(".pdf", ".txt")
+    file_path = f"app/text-files/{file_name}"
+    with open(file_path, "w") as f:
+        f.write(file["text"])
+    return FileResponse(file_path, media_type="text/plain")
+
+
 @API.post("/add_tag")
 async def add_tag(file_id: str = Form(...), tag: str = Form(...)):
     """ Adds a custom tag to a document """
-    API.db.add_tag(file_id, tag)
+    API.db.push_list({"box_id": file_id}, "tags", tag)
     return {'Result': 'Success', "file_id": file_id, "tag": tag}
 
 
 @API.delete("/remove_tag")
-async def remove_tag(file_id: str = Form(...), tag: str = Form(...)):
+async def remove_tag(file_id: str, tag: str):
     """ Removes a tag from a document """
-    API.db.remove_tag(file_id, tag)
+    API.db.pull_list({"box_id": file_id}, "tags", tag)
     return {'Result': 'Success', "file_id": file_id, "tag": tag}
-
-
-if __name__ == '__main__':
-    import uvicorn
-    uvicorn.run(API)
