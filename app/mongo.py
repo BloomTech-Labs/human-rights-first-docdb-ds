@@ -1,6 +1,6 @@
 import json
 from os import getenv
-from typing import Iterator, Dict, Optional
+from typing import Iterator, Dict, Optional, Iterable
 
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -36,6 +36,9 @@ class MongoDB:
     def insert(self, data: Dict):
         self.connect().insert_one(data)
 
+    def insert_many(self, data: Iterable[Dict]):
+        self.connect().insert_many(data)
+
     def update(self, query: Dict, data_update: Dict):
         self.connect().update_one(query, {"$set": data_update})
 
@@ -48,8 +51,12 @@ class MongoDB:
     def pull_list(self, query: Dict, list_name, value):
         self.connect().update(query, {'$pull': {list_name: value}})
 
-    def backup(self):
+    def backup(self, file_name):
         data = list(self.find_all())
-        file_name = "data.json"
         with open(file_name, "w") as file:
             json.dump(data, file)
+
+    def restore(self, file_name):
+        with open(file_name, "r") as file:
+            data = json.load(file)
+        self.insert_many(data)
